@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AaComponents.iml" filepath="$PROJECT_DIR$/AaComponents.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Aac-data-module/Aac-data-module.iml" filepath="$PROJECT_DIR$/Aac-data-module/Aac-data-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AacModule/AacModule.iml" filepath="$PROJECT_DIR$/AacModule/AacModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
