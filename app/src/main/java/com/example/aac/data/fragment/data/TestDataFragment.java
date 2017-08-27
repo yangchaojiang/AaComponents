@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
-import com.aac.expansion.data.BaseDataFragment;
+import com.aac.expansion.data.AacDataFragment;
 import com.aac.module.pres.RequiresPresenter;
 import com.example.aac.R;
 
@@ -16,7 +16,7 @@ import com.example.aac.R;
  * Deprecated: fragment 详细数据demo
  */
 @RequiresPresenter(TestDataFragmentPresenter.class)
-public class TestDataFragment extends BaseDataFragment<TestDataFragmentPresenter, String> {
+public class TestDataFragment extends AacDataFragment<TestDataFragmentPresenter, String> {
 
    private  TextView textView2;
 

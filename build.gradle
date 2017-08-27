@@ -1,12 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.1.4-2'
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha7'
-        classpath 'com.novoda:bintray-release:0.5.0'
+       //  classpath 'com.android.tools.build:gradle:3.0.0-alpha8'
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.novoda:bintray-release:0.4.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -16,7 +19,9 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
-        google()
+        //google()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
     }
     project.ext {
         compileSdkVersion=25
@@ -27,13 +32,16 @@ allprojects {
         versionName = "1.0"
         libSversion="25.3.1"
     }
+
+    //加上这些
     tasks.withType(Javadoc) {
-        options{
+        options {
             encoding "UTF-8"
             charSet 'UTF-8'
-            links "http://docs.oracle.com/javase/7/docs/api"
+            links "http://docs.oracle.com/javase/7/docs/api/"
         }
     }
+
 }
 
 task clean(type: Delete) {

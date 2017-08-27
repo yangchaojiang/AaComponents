@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.aac.expansion.custom.BaseCustomListFragment;
+import com.aac.expansion.custom.AacCustomListFragment;
 import com.aac.module.pres.RequiresPresenter;
 import com.baoyz.widget.PullRefreshLayout;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,7 +20,7 @@ import java.util.List;
  * Deprecated:
  */
 @RequiresPresenter(TestCustomFragmentPresenter.class)
-public class TestCustomListFragment extends BaseCustomListFragment<TestCustomFragmentPresenter, String> {
+public class TestCustomListFragment extends AacCustomListFragment<TestCustomFragmentPresenter, String> {
 
 
     PullRefreshLayout pullToRefreshView;

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/Aac-data-module/Aac-data-module.iml" filepath="$PROJECT_DIR$/Aac-data-module/Aac-data-module.iml" />
       <module fileurl="file://$PROJECT_DIR$/AacModule/AacModule.iml" filepath="$PROJECT_DIR$/AacModule/AacModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kotlintest/kotlintest.iml" filepath="$PROJECT_DIR$/kotlintest/kotlintest.iml" />
     </modules>
   </component>
 </project>

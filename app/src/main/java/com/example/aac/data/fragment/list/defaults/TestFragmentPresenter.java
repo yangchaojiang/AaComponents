@@ -1,6 +1,6 @@
 package com.example.aac.data.fragment.list.defaults;
 
-import com.aac.expansion.list.BaseDefaultLFPresenter;
+import com.aac.expansion.list.AacListFragmentPresenter;
 import com.example.aac.model.TestDataViewModel;
 
 /**
@@ -9,7 +9,7 @@ import com.example.aac.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestFragmentPresenter extends BaseDefaultLFPresenter<TestListFragment, String> {
+public class TestFragmentPresenter extends AacListFragmentPresenter<TestListFragment, String> {
     public static final String TAG = "TestFragmentPresenter";
     private TestDataViewModel viewModel;
 

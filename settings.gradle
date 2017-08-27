@@ -1,1 +1,1 @@
-include ':app', ':AacModule', ':Aac-data-module'
+include ':app', ':AacModule', ':Aac-data-module', ':kotlintest'

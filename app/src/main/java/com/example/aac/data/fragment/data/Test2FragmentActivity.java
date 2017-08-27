@@ -3,7 +3,7 @@ package com.example.aac.data.fragment.data;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.aac.module.ui.BaseLifecycleActivity;
+import com.aac.module.ui.AacActivity;
 import com.example.aac.R;
 
 /**
@@ -12,7 +12,7 @@ import com.example.aac.R;
  * Deprecated: fragment 详细数据demo
  */
 
-public class Test2FragmentActivity extends BaseLifecycleActivity {
+public class Test2FragmentActivity extends AacActivity {
 
 
     @Override

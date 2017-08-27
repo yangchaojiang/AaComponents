@@ -1,6 +1,6 @@
 package com.example.aac.data.activity;
 
-import com.aac.expansion.list.BaseDefaultLAPresenter;
+import com.aac.expansion.list.AacListActivityPresenter;
 import com.example.aac.model.TestDataViewModel;
 
 /**
@@ -9,7 +9,7 @@ import com.example.aac.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestDataListPresenter extends BaseDefaultLAPresenter<TestDataListActivity, String> {
+public class TestDataListPresenter extends AacListActivityPresenter<TestDataListActivity, String> {
     private TestDataViewModel viewModel;
     @Override
     protected void onCreate() {

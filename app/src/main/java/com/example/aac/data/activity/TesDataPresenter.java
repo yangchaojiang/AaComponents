@@ -2,7 +2,7 @@ package com.example.aac.data.activity;
 
 import android.util.Log;
 
-import com.aac.expansion.data.BaseDataPresenter;
+import com.aac.expansion.data.AacDataAPresenter;
 import com.example.aac.model.TestDataViewModel;
 
 /**
@@ -11,7 +11,7 @@ import com.example.aac.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TesDataPresenter extends BaseDataPresenter<TestDataActivity, String> {
+public class TesDataPresenter extends AacDataAPresenter<TestDataActivity, String> {
     public static final String TAG = "TesDataPresenter";
     private TestDataViewModel dataViewModel;
 

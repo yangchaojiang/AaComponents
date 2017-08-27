@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.aac.module.ui.BaseLifecycleActivity;
+import com.aac.module.ui.AacActivity;
 import com.aac.module.pres.RequiresPresenter;
 import com.example.aac.data.activity.TestDataActivity;
 import com.example.aac.data.activity.TestDataListActivity;
 import com.example.aac.data.fragment.TestFragmentActivity;
 
 @RequiresPresenter(Testprenter.class)
-public class MainActivity extends BaseLifecycleActivity<Testprenter> {
+public class MainActivity extends AacActivity<Testprenter> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

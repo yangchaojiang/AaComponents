@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.aac.module.ui.BaseLifecycleActivity;
+import com.aac.module.ui.AacActivity;
 import com.example.aac.R;
 import com.example.aac.data.fragment.data.Test2FragmentActivity;
 import com.example.aac.data.fragment.list.custom.TestCustomFragmentActivity;
@@ -17,7 +17,7 @@ import com.example.aac.data.fragment.list.defaults.TestDataFragmentActivity;
  * Deprecated:
  */
 
-public class TestFragmentActivity extends BaseLifecycleActivity {
+public class TestFragmentActivity extends AacActivity {
     public static final String TAG = "TestDataFragmentActivity";
   ;
     @Override

@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/Aac-data-module" />
             <option value="$PROJECT_DIR$/AacModule" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/kotlintest" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

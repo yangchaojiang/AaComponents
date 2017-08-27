@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aac.expansion.data.BaseDataActivity;
+import com.aac.expansion.data.AacDataActivity;
 import com.aac.module.pres.RequiresPresenter;
 import com.example.aac.R;
 
@@ -15,7 +15,7 @@ import com.example.aac.R;
  */
 
 @RequiresPresenter(TesDataPresenter.class)
-public class TestDataActivity extends BaseDataActivity<TesDataPresenter, String> {
+public class TestDataActivity extends AacDataActivity<TesDataPresenter, String> {
     public static final String TAG = "TestDataActivity";
 
 
@@ -37,9 +37,5 @@ public class TestDataActivity extends BaseDataActivity<TesDataPresenter, String>
 
     }
 
-    @Override
-    public boolean isLoadingOpen() {
-        return false;
-    }
 
 }

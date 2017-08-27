@@ -3,7 +3,7 @@ package com.example.aac.data.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.aac.expansion.list.BaseDefaultListActivity;
+import com.aac.expansion.list.AacListActivity;
 import com.aac.module.pres.RequiresPresenter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.aac.R;
@@ -15,13 +15,13 @@ import com.example.aac.R;
  */
 
 @RequiresPresenter(TestDataListPresenter.class)
-public class TestDataListActivity extends BaseDefaultListActivity<TestDataListPresenter, String> {
+public class TestDataListActivity extends AacListActivity<TestDataListPresenter, String> {
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStartLoadMore(true);
+        setLoadMore(true);
     }
 
     @Override

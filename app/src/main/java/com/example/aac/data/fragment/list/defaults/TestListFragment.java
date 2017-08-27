@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.aac.expansion.list.BaseDefaultListFragment;
+import com.aac.expansion.list.AacListFragment;
 import com.aac.module.pres.RequiresPresenter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.aac.data.fragment.list.defaults.TestFragmentPresenter;
 
 /**
  * Created by yangc on 2017/8/15.
@@ -15,7 +14,7 @@ import com.example.aac.data.fragment.list.defaults.TestFragmentPresenter;
  * Deprecated:
  */
 @RequiresPresenter(TestFragmentPresenter.class)
-public class TestListFragment extends BaseDefaultListFragment<TestFragmentPresenter, String> {
+public class TestListFragment extends AacListFragment<TestFragmentPresenter, String> {
 
     @Override
     public int getItemLayout() {

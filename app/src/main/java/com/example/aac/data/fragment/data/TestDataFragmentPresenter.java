@@ -1,7 +1,7 @@
 package com.example.aac.data.fragment.data;
 
 
-import com.aac.expansion.data.BaseDataFPresenter;
+import com.aac.expansion.data.AacDataFPresenter;
 import com.example.aac.model.TestDataViewModel;
 
 /**
@@ -10,7 +10,7 @@ import com.example.aac.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestDataFragmentPresenter extends BaseDataFPresenter<TestDataFragment, String> {
+public class TestDataFragmentPresenter extends AacDataFPresenter<TestDataFragment, String> {
     public static final String TAG = "TestFragmentPresenter";
     private TestDataViewModel viewModel;
 
