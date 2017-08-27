@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.acc.module.ui.BaseLifecycleActivity;
-import com.acc.module.pres.RequiresPresenter;
-import com.example.aac.data.TestDataActivity;
-import com.example.aac.data.TestDataListActivity;
-import com.example.aac.data.fragment.data.Test2FragmentActivity;
-import com.example.aac.data.fragment.list.TestFragmentActivity;
+import com.aac.module.ui.BaseLifecycleActivity;
+import com.aac.module.pres.RequiresPresenter;
+import com.example.aac.data.activity.TestDataActivity;
+import com.example.aac.data.activity.TestDataListActivity;
+import com.example.aac.data.fragment.TestFragmentActivity;
 
 @RequiresPresenter(Testprenter.class)
 public class MainActivity extends BaseLifecycleActivity<Testprenter> {
@@ -39,13 +38,5 @@ public class MainActivity extends BaseLifecycleActivity<Testprenter> {
                 startActivity(intent);
             }
         });
-        findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Test2FragmentActivity.class);
-                startActivity(intent);
-            }
-        });
     }
-
 }

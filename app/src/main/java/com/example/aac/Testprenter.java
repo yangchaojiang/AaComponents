@@ -2,7 +2,7 @@ package com.example.aac;
 
 import android.util.Log;
 
-import com.acc.module.ui.BaseLifecycle;
+import com.aac.module.ui.BaseLifecycle;
 
 /**
  * Created by yangc on 2017/8/13.

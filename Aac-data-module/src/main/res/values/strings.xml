@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AccDataModule</string>
+    <string name="aac_no_data_hint">暂无数据</string>
 </resources>

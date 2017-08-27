@@ -10,7 +10,7 @@
         android:background="@color/colorPrimary"
         android:title="列表数据" />
     <fragment
-        android:name="com.example.aac.data.fragment.list.TestListFragment"
+        android:name="com.example.aac.data.fragment.list.defaults.TestListFragment"
         android:tag="@string/abc_search_hint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

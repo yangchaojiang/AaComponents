@@ -3,26 +3,22 @@ package com.example.aac.data.fragment.data;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.acc.expansion.data.BaseDataFragment;
-import com.acc.module.pres.RequiresPresenter;
+import com.aac.expansion.data.BaseDataFragment;
+import com.aac.module.pres.RequiresPresenter;
 import com.example.aac.R;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by yangc on 2017/8/15.
  * E-Mail:yangchaojiang@outlook.com
- * Deprecated:
+ * Deprecated: fragment 详细数据demo
  */
 @RequiresPresenter(TestDataFragmentPresenter.class)
 public class TestDataFragment extends BaseDataFragment<TestDataFragmentPresenter, String> {
 
-    TextView textView2;
+   private  TextView textView2;
 
     @Override
     public int getContentLayout() {
@@ -35,6 +31,7 @@ public class TestDataFragment extends BaseDataFragment<TestDataFragmentPresenter
         textView2 = $(view, R.id.textView2);
         showLoading(textView2);
     }
+
 
     @Override
     public void setData(@NonNull String data) {

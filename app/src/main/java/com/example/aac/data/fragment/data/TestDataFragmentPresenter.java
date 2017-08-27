@@ -1,7 +1,7 @@
 package com.example.aac.data.fragment.data;
 
 
-import com.acc.expansion.data.BaseDataFragmentPresenter;
+import com.aac.expansion.data.BaseDataFPresenter;
 import com.example.aac.model.TestDataViewModel;
 
 /**
@@ -10,7 +10,7 @@ import com.example.aac.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestDataFragmentPresenter extends BaseDataFragmentPresenter<TestDataFragment, String> {
+public class TestDataFragmentPresenter extends BaseDataFPresenter<TestDataFragment, String> {
     public static final String TAG = "TestFragmentPresenter";
     private TestDataViewModel viewModel;
 
@@ -19,6 +19,11 @@ public class TestDataFragmentPresenter extends BaseDataFragmentPresenter<TestDat
     protected void onCreateView() {
         super.onCreateView();
         viewModel=getViewModel(TestDataViewModel.class);
+
+    }
+
+    @Override
+    protected void lazyLoad() {
         viewModel.getData().observe(getView(),getDataSubscriber());
     }
 }

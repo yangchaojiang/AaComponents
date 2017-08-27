@@ -11,5 +11,5 @@
         android:background="@color/colorPrimary"
         android:title="列表数据" />
 
-    <include layout="@layout/acc_recycle_view" />
+    <include layout="@layout/aac_recycle_view" />
 </LinearLayout>

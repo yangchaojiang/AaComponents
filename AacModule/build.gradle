@@ -18,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
@@ -25,8 +29,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:appcompat-v7:${libSversion}"
     testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:${libSversion}"
     compile 'android.arch.lifecycle:runtime:1.0.0-alpha5'
     compile 'android.arch.lifecycle:extensions:1.0.0-alpha5'
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha5"
@@ -34,17 +38,14 @@ dependencies {
 
 apply plugin: 'com.novoda.bintray-release'
 //上传到jcenter
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
 //gradlew clean build bintrayUpload -PdryRun=false  使用时 输入命令行
 publish {
-    bintrayUser = properties.getProperty("bintray.user")    //读取 local.properties 文件里面的 bintray.user
-    bintrayKey = properties.getProperty("bintray.apikey")   //读取 local.properties 文件里面的 bintray.apikey
+    repoName="ycjiang"//仓库名
     userOrg = 'ycjiang'
-    repoName="ycjiang"
     groupId = 'com.ycjiang'
-    artifactId = 'aac-module'
+    artifactId = 'AacModule'
     publishVersion = '1.0.1'
-    desc = '基于google Android Architecture Components 封装实现MVP快速开发框架'
-    website = 'https://github.com/yangchaojiang/Aac'
+    desc = 'Based on google Android Architecture Components package to achieve MVP rapid development framework'
+    website = 'https://github.com/yangchaojiang/AaComponents'
+    dryRun = false
 }
