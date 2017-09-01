@@ -1,6 +1,6 @@
 package com.example.aac.data.fragment.list.custom;
 
-import com.aac.expansion.custom.AacCustomLFPresenter;
+import com.aac.expansion.custom.AacCustomLFragmentPresenter;
 import com.example.aac.model.TestDataViewModel;
 
 /**
@@ -9,7 +9,7 @@ import com.example.aac.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestCustomFragmentPresenter extends AacCustomLFPresenter<TestCustomListFragment, String> {
+public class TestCustomFragmentPresenter extends AacCustomLFragmentPresenter<TestCustomListFragment, String> {
     public static final String TAG = "TestFragmentPresenter";
     private TestDataViewModel viewModel;
 
@@ -19,19 +19,13 @@ public class TestCustomFragmentPresenter extends AacCustomLFPresenter<TestCustom
         viewModel = getViewModel(TestDataViewModel.class);
     }
 
-
-    @Override
-    public void refresh() {
-        viewModel.getListData(1).observe(getView(), getDataSubscriber());
-    }
-
     @Override
     protected void lazyLoad() {
         viewModel.getListData(1).observe(getView(), getDataSubscriber());
     }
 
     @Override
-    public void setPageData(int pager) {
+    public void setLoadData(int pager) {
         viewModel.getListData(pager).observe(getView(), getDataSubscriber());
     }
 }

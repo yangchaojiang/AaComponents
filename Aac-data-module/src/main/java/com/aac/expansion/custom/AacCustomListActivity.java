@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
@@ -26,9 +25,8 @@ import java.util.List;
  */
 
 @RequiresPresenter(AacDataAPresenter.class)
-public abstract class AacCustomListActivity<P extends AacCustomLAPresenter, M> extends AacActivity<P>
+public abstract class AacCustomListActivity<P extends AacCustomLActivityPresenter, M> extends AacActivity<P>
         implements BaseQuickAdapter.RequestLoadMoreListener {
-    private static final String TAG = AacCustomListActivity.class.getName();
     private RecyclerView recyclerView;
     private QuickDataAdapter adapter;
     private int daraPage = 1;
@@ -48,7 +46,6 @@ public abstract class AacCustomListActivity<P extends AacCustomLAPresenter, M> e
         adapter.bindToRecyclerView(recyclerView);
         adapter.setEmptyView(R.layout.aac_view_list_con_empty);
         helper = new LoadViewHelper(recyclerView);
-        Log.d(TAG, "onCreate");
     }
 
     @Override
@@ -70,13 +67,13 @@ public abstract class AacCustomListActivity<P extends AacCustomLAPresenter, M> e
      * **/
     public  void onRefresh() {
         daraPage = 1;
-        getPresenter().refresh();
+        getPresenter().setLoadData(daraPage);
     }
 
     @Override
     public void onLoadMoreRequested() {
         daraPage += 1;
-        getPresenter().setPageData(daraPage);
+        getPresenter().setLoadData(daraPage);
     }
 
     public void setData(@NonNull List<M> data) {
@@ -97,6 +94,7 @@ public abstract class AacCustomListActivity<P extends AacCustomLAPresenter, M> e
 
     /***
      * 错误
+     * @param  e  错误
      **/
     public void setError(Throwable e) {
         if (daraPage < 2) {

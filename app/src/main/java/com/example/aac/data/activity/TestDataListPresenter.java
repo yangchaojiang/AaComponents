@@ -19,12 +19,7 @@ public class TestDataListPresenter extends AacListActivityPresenter<TestDataList
     }
 
     @Override
-    public void setPageData(int pager) {
+    public void setLoadData(int pager) {
         viewModel.getListData(pager).observe(getView(), getDataSubscriber());
-    }
-
-    @Override
-    public void refresh() {
-        viewModel.getListData(1).observe(getView(), getDataSubscriber());
     }
 }

@@ -19,19 +19,13 @@ public class TestFragmentPresenter extends AacListFragmentPresenter<TestListFrag
         viewModel = getViewModel(TestDataViewModel.class);
     }
 
-
-    @Override
-    public void refresh() {
-        viewModel.getListData(1).observe(getView(), getDataSubscriber());
-    }
-
     @Override
     protected void lazyLoad() {
         viewModel.getListData(1).observe(getView(), getDataSubscriber());
     }
 
     @Override
-    public void setPageData(int pager) {
+    public void setLoadData(int pager) {
         viewModel.getListData(pager).observe(getView(), getDataSubscriber());
     }
 }

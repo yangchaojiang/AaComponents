@@ -1,4 +1,4 @@
-package com.example.aac;
+package com.example.kotlin.app;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,9 +15,7 @@ public class ActivityCallback extends ActivityLifecycleCallbacksWrapper {
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         super.onActivityCreated(activity, savedInstanceState);
-
     }
-
 
     @Override
     public void onActivityDestroyed(Activity activity) {

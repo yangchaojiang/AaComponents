@@ -20,7 +20,6 @@ public  class TestDataActivity : AacDataActivity<TestDataPresenter, String>(){
 
     }
 
-
     override fun getContentLayout(): Int {
         return  R.layout.test_data_activity
     }

@@ -1,16 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        //Activity右滑进出的动画，觉得这个不好看随便换成自己的
+        <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
     </style>
     <style name="AppThemes" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        //Activity右滑进出的动画，觉得这个不好看随便换成自己的
+        <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
+    </style>
+    <style name="MainTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">false</item>//就是关掉这个Activity的透明背景
     </style>
 </resources>

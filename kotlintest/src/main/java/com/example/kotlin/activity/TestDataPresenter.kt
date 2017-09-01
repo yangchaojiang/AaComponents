@@ -19,7 +19,7 @@ class TestDataPresenter : AacDataAPresenter<TestDataActivity, String>() {
     }
     override fun onCreateView() {
         super.onCreateView()
-        viewModel?.getData()?.observe(view,dataSubscriber)
+        viewModel?.getData( )?.observe(view,dataSubscriber)
     }
 
 

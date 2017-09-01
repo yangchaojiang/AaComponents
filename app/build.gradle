@@ -27,4 +27,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':Aac-data-module')
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    compile 'com.jude:swipebackhelper:3.1.2'
 }

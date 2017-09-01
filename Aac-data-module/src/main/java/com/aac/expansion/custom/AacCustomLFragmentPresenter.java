@@ -13,7 +13,7 @@ import java.util.List;
  * Deprecated: Fragment 列表数据理处理
  */
 
-public abstract class AacCustomLFPresenter<V extends AacCustomListFragment, M> extends AacFragmentPresenter<V> {
+public abstract class AacCustomLFragmentPresenter<V extends AacCustomListFragment, M> extends AacFragmentPresenter<V> {
 
     private Observer<List<M>> observeForever = new Observer<List<M>>() {
 
@@ -44,15 +44,10 @@ public abstract class AacCustomLFPresenter<V extends AacCustomListFragment, M> e
     /***
      * 加载分页数据 列表有分页
      *
-     * @param pager
+     * @param pager   等于1 刷新
      ***/
-    public void setPageData(int pager) {
-    }
+    public abstract void setLoadData(int pager) ;
 
-    /**
-     * 刷新更新数据
-     */
-    public abstract void refresh();
     /**
      * 当视图初始化并且对用户可见的时候去真正的加载数据
      *

@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * Created by yangc on 2017/8/14.
  * E-Mail:yangchaojiang@outlook.com
- * Deprecated:  数据业务
+ * Deprecated:  自定义数据业务
  */
 
-public abstract class AacCustomLAPresenter<V extends AacCustomListActivity, M> extends AacActivityPresenter<V> {
+public abstract class AacCustomLActivityPresenter<V extends AacCustomListActivity, M> extends AacActivityPresenter<V> {
 
     private Observer<List<M>> observeForever = new Observer<List<M>>() {
 
@@ -42,21 +42,11 @@ public abstract class AacCustomLAPresenter<V extends AacCustomListActivity, M> e
     public void postValue(List<M> data) {
         getView().setData(data);
     }
-
     /***
      * 加载分页数据
      *
-     * @param pager d分页
+     * @param pager 分页  等于1
      ***/
-    public void setPageData(int pager) {
-    }
-
-    /**
-     * 刷新更新数据
-     */
-    public void refresh() {
-    }
-
-
+    public abstract void setLoadData(int pager);
 
 }

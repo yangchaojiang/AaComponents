@@ -9,7 +9,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
 import com.aac.module.ui.AacActivity;
@@ -17,7 +16,6 @@ import com.aac.module.pres.RequiresPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.helper.loadviewhelper.load.LoadViewHelper;
-
 import java.util.List;
 
 /**
@@ -50,10 +48,8 @@ public abstract class AacListActivity<P extends AacListActivityPresenter, M> ext
         swipeRefresh.setOnRefreshListener(this);
         adapter = new QuickDataAdapter();
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setEmptyView(R.layout.aac_view_list_con_empty);
         helper = new LoadViewHelper(recyclerView);
-        helper.showLoading();
-
+         showLoadView();
         Log.d(TAG, "onCreate");
     }
 
@@ -77,23 +73,27 @@ public abstract class AacListActivity<P extends AacListActivityPresenter, M> ext
     @Override
     public void onRefresh() {
         daraPage = 1;
-        getPresenter().refresh();
+        getPresenter().setLoadData(daraPage);
     }
 
     @Override
     public void onLoadMoreRequested() {
         daraPage += 1;
-        getPresenter().setPageData(daraPage);
+        getPresenter().setLoadData(daraPage);
     }
 
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
           if (!swipeRefresh.isRefreshing()) {
                 helper.showContent();
-            }
+            }else {
               setRefreshing(false);
+            }
              adapter.getData().clear();
              adapter.notifyDataSetChanged();
+            if (data.isEmpty()){
+                helper.showEmpty();
+            }
         } else {
             if (data.isEmpty()) {
                 adapter.loadMoreEnd();
@@ -117,6 +117,13 @@ public abstract class AacListActivity<P extends AacListActivityPresenter, M> ext
         }
     }
 
+
+    /***
+     *显示数据加载view
+     * **/
+    public void  showLoadView(){
+        helper.showLoading();
+    }
     /***
      * 获取当前的分页数
      ***/
@@ -147,9 +154,13 @@ public abstract class AacListActivity<P extends AacListActivityPresenter, M> ext
 
     /***
      * 是否下拉刷新
+     * @param  setRefreshing  true 开始刷新 false 停滞
      **/
     public void setRefreshing(boolean setRefreshing) {
         swipeRefresh.setRefreshing(setRefreshing);
+        if (helper!=null){
+            helper.showContent();
+        }
     }
 
     /***

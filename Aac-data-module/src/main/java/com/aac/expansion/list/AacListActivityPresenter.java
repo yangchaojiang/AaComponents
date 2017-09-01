@@ -46,17 +46,8 @@ public abstract class AacListActivityPresenter<V extends AacListActivity, M> ext
     /***
      * 加载分页数据
      *
-     * @param pager d分页
+     * @param pager 分页 等于1 刷新
      ***/
-    public void setPageData(int pager) {
-    }
-
-    /**
-     * 刷新更新数据
-     */
-    public void refresh() {
-    }
-
-
+    public abstract void setLoadData(int pager);
 
 }

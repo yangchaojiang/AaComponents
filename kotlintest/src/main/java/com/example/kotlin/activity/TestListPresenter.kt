@@ -10,12 +10,13 @@ import com.example.kotlin.viewmodel.TestDataViewModel
  */
 
 class TestListPresenter : AacListActivityPresenter<TestListActivity, String>(){
-
     private  var viewModel: TestDataViewModel?=null
-
     override fun onCreate() {
         super.onCreate()
         viewModel=getViewModel(TestDataViewModel::class.java)
         viewModel?.getListData(1)?.observe(view,dataSubscriber)
+    }
+    override fun setLoadData(pager: Int) {
+        viewModel?.getListData(pager)?.observe(view,dataSubscriber)
     }
 }

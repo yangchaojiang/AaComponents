@@ -18,7 +18,6 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
 @RequiresPresenter(AacDataAPresenter.class)
 public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends AacActivity<P> {
     private LoadViewHelper helper;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

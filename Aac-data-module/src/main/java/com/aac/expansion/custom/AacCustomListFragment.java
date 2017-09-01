@@ -23,7 +23,7 @@ import java.util.List;
  * Deprecated: 列表Fragment 支持懒加载， 子类重写setOpenLazyLoad方法，开启懒加载
  */
 
-public abstract class AacCustomListFragment<P extends AacCustomLFPresenter, M> extends AacFragment<P>
+public abstract class AacCustomListFragment<P extends AacCustomLFragmentPresenter, M> extends AacFragment<P>
         implements   BaseQuickAdapter.RequestLoadMoreListener {
 
     private RecyclerView recyclerView;
@@ -119,14 +119,14 @@ public abstract class AacCustomListFragment<P extends AacCustomLFPresenter, M> e
      * 子类刷新回调调用该方法
      * **/
     public void getBaseOnRefresh() {
-        daraPage = 0;
-        getPresenter().refresh();
+        daraPage = 1;
+        getPresenter().setLoadData(daraPage);
     }
 
     @Override
     public void onLoadMoreRequested() {
         daraPage += 1;
-        getPresenter().setPageData(daraPage);
+        getPresenter().setLoadData(daraPage);
     }
 
 
@@ -151,6 +151,7 @@ public abstract class AacCustomListFragment<P extends AacCustomLFPresenter, M> e
 
     /***
      * 错误
+     * @param  e  错误
      **/
     public void setError(Throwable e) {
         if (daraPage < 2) {

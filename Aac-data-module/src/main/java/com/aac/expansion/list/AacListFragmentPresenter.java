@@ -44,15 +44,9 @@ public abstract class AacListFragmentPresenter<V extends AacListFragment, M> ext
     /***
      * 加载分页数据 列表有分页
      *
-     * @param pager
+     * @param pager  等于1刷新
      ***/
-    public void setPageData(int pager) {
-    }
-
-    /**
-     * 刷新更新数据
-     */
-    public abstract void refresh();
+    public abstract void setLoadData(int pager);
     /**
      * 当视图初始化并且对用户可见的时候去真正的加载数据
      *

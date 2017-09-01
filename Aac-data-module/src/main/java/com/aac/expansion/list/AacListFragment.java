@@ -58,9 +58,8 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         swipeRefresh.setOnRefreshListener(this);
         adapter = new QuickDataAdapter();
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setEmptyView(R.layout.aac_view_list_con_empty);
         helper = new LoadViewHelper(swipeRefresh);
-        helper.showLoading();
+        showLoadView();
         isInit = true;
         /**初始化的时候去加载数据**/
         if (setOpenLazyLoad()) isCanLoadData();
@@ -127,13 +126,13 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
     @Override
     public void onRefresh() {
         daraPage = 1;
-        getPresenter().refresh();
+        getPresenter().setLoadData(daraPage);
     }
 
     @Override
     public void onLoadMoreRequested() {
         daraPage += 1;
-        getPresenter().setPageData(daraPage);
+        getPresenter().setLoadData(daraPage);
     }
 
 
@@ -144,7 +143,11 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
             adapter.notifyDataSetChanged();
             setRefreshing(false);
             adapter.addData(data);
-            helper.showContent();
+            if (data.isEmpty()){
+                helper.showEmpty();
+            }else {
+                helper.showContent();
+            }
         } else {
             if (data.isEmpty()) {
                 adapter.loadMoreEnd();
@@ -156,7 +159,12 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
 
 
     }
-
+    /***
+     *显示数据加载view
+     * **/
+    public void  showLoadView(){
+        helper.showLoading();
+    }
     /***
      * 错误
      **/
@@ -191,10 +199,14 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
     }
 
     /***
-     * 是@param refreshing 是否刷新 true   false 则停止
+     * @param refreshing 是否刷新 true   false 则停止
+     *
      **/
     public void setRefreshing(boolean refreshing) {
         swipeRefresh.setRefreshing(refreshing);
+        if (helper!=null){
+            helper.showContent();
+        }
     }
 
     /**
