@@ -20,9 +20,9 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
-        //google()
-        mavenCentral()
         maven { url 'https://maven.google.com' }
+       // mavenCentral()
+        //google()
     }
     project.ext {
         compileSdkVersion=25

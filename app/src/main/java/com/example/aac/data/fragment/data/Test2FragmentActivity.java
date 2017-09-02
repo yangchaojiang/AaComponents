@@ -18,7 +18,7 @@ public class Test2FragmentActivity extends AacActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_data_fragment_view);
+        setContentView(R.layout.test__fragment_view);
 
     }
 

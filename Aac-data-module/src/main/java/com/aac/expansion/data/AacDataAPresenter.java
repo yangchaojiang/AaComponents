@@ -3,7 +3,7 @@ package com.aac.expansion.data;
 
 import android.arch.lifecycle.Observer;
 
-import com.aac.module.ui.AacActivityPresenter;
+import com.aac.module.ui.AacPresenter;
 
 /**
  * Created by yangc on 2017/8/14.
@@ -11,7 +11,7 @@ import com.aac.module.ui.AacActivityPresenter;
  * Deprecated:  数据业务
  */
 
-public class AacDataAPresenter<V extends AacDataActivity, M> extends AacActivityPresenter<V> {
+public class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresenter<V> {
     private Observer<M> observeForever = new Observer<M>() {
         @Override
         public void onChanged(M m) {

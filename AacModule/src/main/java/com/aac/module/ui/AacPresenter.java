@@ -19,7 +19,7 @@ import android.support.v4.app.FragmentActivity;
  * Deprecated:  业务处理控制类
  */
 
-public abstract class AacActivityPresenter<ActivityType> implements LifecycleObserver{
+public abstract class AacPresenter<ActivityType> implements LifecycleObserver{
     private Lifecycle lifecycle;
     private ActivityType view;
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

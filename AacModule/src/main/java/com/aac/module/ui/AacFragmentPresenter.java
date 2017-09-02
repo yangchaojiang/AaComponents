@@ -7,9 +7,7 @@ package com.aac.module.ui;
  * Deprecated:  Fragment业务处理控制类
  */
 
-public class AacFragmentPresenter<FragmentType> extends AacActivityPresenter<FragmentType> {
-
-
+public class AacFragmentPresenter<FragmentType> extends AacPresenter<FragmentType> {
 
     protected void onDestroyView() {
 

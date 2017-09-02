@@ -33,7 +33,7 @@ import android.os.Bundle;
  * Wraps into an {@link ActivityLifecycleCallbacks}.
  */
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-public class ActivityLifecycleCallbacksWrapper implements ActivityLifecycleCallbacks {
+public abstract class ActivityLifecycleCallbacksWrapper implements ActivityLifecycleCallbacks {
 
 
     @Override

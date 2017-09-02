@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 @RequiresPresenter(AacDataAPresenter.class)
-public abstract class AacListActivity<P extends AacListActivityPresenter, M> extends AacActivity<P>
+public abstract class AacListActivity<P extends AacListPresenter, M> extends AacActivity<P>
         implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     private static final String TAG = AacListActivity.class.getName();
     private RecyclerView recyclerView;

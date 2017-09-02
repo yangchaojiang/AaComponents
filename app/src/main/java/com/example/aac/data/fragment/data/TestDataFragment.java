@@ -22,14 +22,14 @@ public class TestDataFragment extends AacDataFragment<TestDataFragmentPresenter,
 
     @Override
     public int getContentLayout() {
-        return R.layout.test_data_view;
+        return R.layout.test_data_fragment_view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView2 = $(view, R.id.textView2);
-        showLoading(textView2);
+        textView2 = $(view, R.id.textView);
+        showLoading($(view,R.id.textViewlayout));
     }
 
 

@@ -8,7 +8,7 @@ import android.content.Intent;
  * Deprecated:  service业务处理控制类
  */
 
-public  abstract class AacServicePresenter<ActivityType> extends AacActivityPresenter<ActivityType> {
+public  abstract class AacServicePresenter<ActivityType> extends AacPresenter<ActivityType> {
 
 
     protected void onStartCommand(Intent intent, int flags, int startId) {

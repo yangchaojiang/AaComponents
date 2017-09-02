@@ -1,20 +1,19 @@
-package com.aac.expansion.list;
-
+package com.aac.expansion.custom;
 
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 
-import com.aac.module.ui.AacActivityPresenter;
+import com.aac.module.ui.AacFragmentPresenter;
 
 import java.util.List;
 
 /**
  * Created by yangc on 2017/8/14.
  * E-Mail:yangchaojiang@outlook.com
- * Deprecated:  数据业务
+ * Deprecated: Fragment 列表数据理处理
  */
 
-public abstract class AacListActivityPresenter<V extends AacListActivity, M> extends AacActivityPresenter<V> {
+public abstract class AacCustomFLPresenter<V extends AacCustomListFragment, M> extends AacFragmentPresenter<V> {
 
     private Observer<List<M>> observeForever = new Observer<List<M>>() {
 
@@ -27,7 +26,6 @@ public abstract class AacListActivityPresenter<V extends AacListActivity, M> ext
             }
         }
     };
-
 
     /**
      * 订阅
@@ -44,10 +42,23 @@ public abstract class AacListActivityPresenter<V extends AacListActivity, M> ext
     }
 
     /***
-     * 加载分页数据
+     * 加载分页数据 列表有分页
      *
-     * @param pager 分页 等于1 刷新
+     * @param pager   等于1 刷新
      ***/
-    public abstract void setLoadData(int pager);
+    public abstract void setLoadData(int pager) ;
 
+    /**
+     * 当视图初始化并且对用户可见的时候去真正的加载数据
+     *
+     */
+    protected abstract void lazyLoad();
+
+
+    /**
+     * 当视图已经对用户不可见并且加载过数据，如果需要在切换到其他页面时停止加载数据，可以覆写此方法
+     */
+    protected void stopLoad() {
+
+    }
 }

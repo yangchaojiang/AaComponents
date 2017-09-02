@@ -23,7 +23,7 @@ import java.util.List;
  * Deprecated: 列表Fragment 支持懒加载， 子类重写setOpenLazyLoad方法，开启懒加载
  */
 
-public abstract class AacCustomListFragment<P extends AacCustomLFragmentPresenter, M> extends AacFragment<P>
+public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> extends AacFragment<P>
         implements   BaseQuickAdapter.RequestLoadMoreListener {
 
     private RecyclerView recyclerView;

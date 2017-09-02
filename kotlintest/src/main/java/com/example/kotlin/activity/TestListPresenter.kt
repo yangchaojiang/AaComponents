@@ -1,6 +1,6 @@
 package com.example.kotlin.activity
 
-import com.aac.expansion.list.AacListActivityPresenter
+import com.aac.expansion.list.AacListPresenter
 import com.example.kotlin.viewmodel.TestDataViewModel
 
 /**
@@ -9,7 +9,7 @@ import com.example.kotlin.viewmodel.TestDataViewModel
  * Deprecated:
  */
 
-class TestListPresenter : AacListActivityPresenter<TestListActivity, String>(){
+class TestListPresenter : AacListPresenter<TestListActivity, String>(){
     private  var viewModel: TestDataViewModel?=null
     override fun onCreate() {
         super.onCreate()

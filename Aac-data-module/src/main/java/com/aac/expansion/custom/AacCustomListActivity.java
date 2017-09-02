@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 @RequiresPresenter(AacDataAPresenter.class)
-public abstract class AacCustomListActivity<P extends AacCustomLActivityPresenter, M> extends AacActivity<P>
+public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> extends AacActivity<P>
         implements BaseQuickAdapter.RequestLoadMoreListener {
     private RecyclerView recyclerView;
     private QuickDataAdapter adapter;

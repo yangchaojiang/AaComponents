@@ -1,7 +1,7 @@
 package com.aac.module.pres;
 
 
-import com.aac.module.ui.AacActivityPresenter;
+import com.aac.module.ui.AacPresenter;
 
 /**
  * Created by yangc on 2017/8/13.
@@ -10,7 +10,7 @@ import com.aac.module.ui.AacActivityPresenter;
  */
 public class PresenterBuilder {
 
-    public static <PresenterType extends AacActivityPresenter> PresenterType fromViewClass(Class<?> viewClass) {
+    public static <PresenterType extends AacPresenter> PresenterType fromViewClass(Class<?> viewClass) {
         RequiresPresenter annotation = viewClass.getAnnotation(RequiresPresenter.class);
         //noinspection unchecked
         if (annotation == null) {

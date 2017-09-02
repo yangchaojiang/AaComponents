@@ -24,7 +24,7 @@ import com.aac.module.pres.PresenterBuilder;
  * Deprecated: 控制activity 控制类
  */
 
-public abstract class AacActivity<L extends AacActivityPresenter> extends AppCompatActivity implements LifecycleRegistryOwner {
+public abstract class AacActivity<L extends AacPresenter> extends AppCompatActivity implements LifecycleRegistryOwner {
     LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private L t = PresenterBuilder.fromViewClass(this.getClass());
     //如果使用了ToolBar则自动部署。没有则无影响。

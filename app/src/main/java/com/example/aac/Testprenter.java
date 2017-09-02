@@ -2,7 +2,7 @@ package com.example.aac;
 
 import android.util.Log;
 
-import com.aac.module.ui.AacActivityPresenter;
+import com.aac.module.ui.AacPresenter;
 
 /**
  * Created by yangc on 2017/8/13.
@@ -10,7 +10,7 @@ import com.aac.module.ui.AacActivityPresenter;
  * Deprecated:
  */
 
-public class Testprenter extends AacActivityPresenter<MainActivity> {
+public class Testprenter extends AacPresenter<MainActivity> {
     public static final String TAG = "Testprenter";
 
     @Override

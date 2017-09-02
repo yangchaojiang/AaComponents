@@ -1,6 +1,6 @@
 package com.example.aac.data.fragment.list.custom;
 
-import com.aac.expansion.custom.AacCustomLFragmentPresenter;
+import com.aac.expansion.custom.AacCustomFLPresenter;
 import com.example.aac.model.TestDataViewModel;
 
 /**
@@ -9,7 +9,7 @@ import com.example.aac.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestCustomFragmentPresenter extends AacCustomLFragmentPresenter<TestCustomListFragment, String> {
+public class TestCustomFragmentPresenter extends AacCustomFLPresenter<TestCustomListFragment, String> {
     public static final String TAG = "TestFragmentPresenter";
     private TestDataViewModel viewModel;
 

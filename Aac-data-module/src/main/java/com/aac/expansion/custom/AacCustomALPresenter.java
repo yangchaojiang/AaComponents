@@ -4,7 +4,7 @@ package com.aac.expansion.custom;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 
-import com.aac.module.ui.AacActivityPresenter;
+import com.aac.module.ui.AacPresenter;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * Deprecated:  自定义数据业务
  */
 
-public abstract class AacCustomLActivityPresenter<V extends AacCustomListActivity, M> extends AacActivityPresenter<V> {
+public abstract class AacCustomALPresenter<V extends AacCustomListActivity, M> extends AacPresenter<V> {
 
     private Observer<List<M>> observeForever = new Observer<List<M>>() {
 
