@@ -17,4 +17,4 @@ AaComponents 是一套基于MVP模式的快速开发框架。定义了一套开�
 ```
 
 #### More
-Find more details about Matisse in [wiki](https://github.com/yangchaojiang/AaComponents.wiki)
+Find more details about Matisse in [wiki](https://github.com/yangchaojiang/AaComponents.wiki.git)
