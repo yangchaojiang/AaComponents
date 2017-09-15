@@ -3,38 +3,36 @@
     package="com.example.aac">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:theme="@style/MainTheme"
-            >
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".data.activity.TestDataActivity"/>
-        <activity android:name=".data.activity.TestDataListActivity"
-            android:theme="@style/AppThemes"
+        <activity android:name=".data.activity.TestDataActivity" />
+        <activity
+            android:name=".data.activity.TestDataListActivity"
+              />
+        <activity
+            android:name=".data.fragment.list.defaults.TestDataFragmentActivity"
+             />
+        <activity
+            android:name=".data.fragment.data.Test2FragmentActivity"
+            />
+        <activity android:name=".data.fragment.TestFragmentActivity" />
+        <activity
+            android:name=".data.fragment.list.custom.TestCustomFragmentActivity"
+            />
 
-            />
-        <activity android:name=".data.fragment.list.defaults.TestDataFragmentActivity"
-        android:theme="@style/AppThemes"
-        />
-        <activity android:name=".data.fragment.data.Test2FragmentActivity"
-            android:theme="@style/AppThemes"
-
-            />
-        <activity android:name=".data.fragment.TestFragmentActivity"
-            />
-        <activity android:name=".data.fragment.list.custom.TestCustomFragmentActivity"
-            android:theme="@style/AppThemes"
-            />
     </application>
 
 </manifest>

@@ -15,6 +15,5 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(new ActivityCallback());
-
     }
 }

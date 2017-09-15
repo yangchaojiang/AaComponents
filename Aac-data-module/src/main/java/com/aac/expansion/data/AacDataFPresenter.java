@@ -2,6 +2,8 @@ package com.aac.expansion.data;
 
 
 import android.arch.lifecycle.Observer;
+import android.support.annotation.NonNull;
+
 import com.aac.module.ui.AacFragmentPresenter;
 
 /**
@@ -18,7 +20,8 @@ public abstract class AacDataFPresenter<V extends AacDataFragment, M> extends Aa
         public void onChanged(M m) {
             if (m != null) {
                 getView().setBaseData(m);
-            } else {
+            }
+            else {
                 getView().setBaseError(new Throwable(new NullPointerException()));
             }
         }
@@ -26,7 +29,7 @@ public abstract class AacDataFPresenter<V extends AacDataFragment, M> extends Aa
     /***
      * 可以子线程数据ui线程手动发布数据
      **/
-    public void postData(M data) {
+    public void postData(@NonNull  M data) {
         getView().setBaseData(data);
     }
     /**

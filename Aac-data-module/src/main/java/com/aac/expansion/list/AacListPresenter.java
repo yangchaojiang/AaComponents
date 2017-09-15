@@ -2,6 +2,7 @@ package com.aac.expansion.list;
 
 
 import android.arch.lifecycle.Observer;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.aac.module.ui.AacPresenter;
@@ -39,7 +40,7 @@ public abstract class AacListPresenter<V extends AacListActivity, M> extends Aac
     /***
      * 手动发布数据
      **/
-    public void postValue(List<M> data) {
+    public void postValue(@NonNull List<M> data) {
         getView().setData(data);
     }
 

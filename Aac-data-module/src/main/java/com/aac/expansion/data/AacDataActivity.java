@@ -4,7 +4,7 @@ package com.aac.expansion.data;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
+import com.aac.expansion.ener.ViewGetDataener;
 import com.aac.module.ui.AacActivity;
 import com.aac.module.pres.RequiresPresenter;
 import com.helper.loadviewhelper.load.LoadViewHelper;
@@ -16,14 +16,13 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  */
 
 @RequiresPresenter(AacDataAPresenter.class)
-public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends AacActivity<P> {
+public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends AacActivity<P> implements ViewGetDataener<M> {
     private LoadViewHelper helper;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentLayout());
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -31,17 +30,15 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
             helper.onDestroy();
         }
     }
-
     /***
      *父类调用方法，用于切换
      * **/
-    void setBaseData(@NonNull M data) {
+     void setBaseData(@NonNull M data) {
         setData(data);
         if (helper != null) {
             helper.showContent();
         }
     }
-
     /***
      *父类调用方法，用于切换
      * **/
@@ -51,25 +48,9 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
             helper.showError();
         }
     }
-
-    public  LoadViewHelper getHelper(){
+    @Override
+    public LoadViewHelper getLoadViewHelper() {
         return helper;
     }
-
-    /***
-     * 内容布局id
-     ***/
-    public abstract int getContentLayout();
-
-    /***
-     * 返回数据
-     ***/
-    public abstract void setData(@NonNull M data);
-
-    /***
-     * 错误处理
-     **/
-    public abstract void setError(Throwable e);
-
 
 }

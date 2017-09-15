@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.aac.expansion.R;
+import com.aac.expansion.ener.ViewGetListener;
 import com.aac.module.ui.AacFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -24,8 +26,7 @@ import java.util.List;
  */
 
 public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> extends AacFragment<P>
-        implements   BaseQuickAdapter.RequestLoadMoreListener {
-
+        implements BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
     private RecyclerView recyclerView;
     private QuickDataAdapter adapter;
     private int daraPage = 1;
@@ -39,7 +40,7 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            return inflater.inflate(getContentLayout(), container, false);
+        return inflater.inflate(getContentLayout(), container, false);
     }
 
     @Override
@@ -69,9 +70,9 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
             adapter.setOnLoadMoreListener(null, recyclerView);
 
         }
-        if (helper!=null){
+        if (helper != null) {
             helper.onDestroy();
-            helper=null;
+            helper = null;
         }
     }
 
@@ -105,19 +106,18 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
         }
     }
 
-
     /**
      * 开启懒加载
      *
-     * @return  setOpenLazyLoad true  开启 false
+     * @return setOpenLazyLoad true  开启 false
      **/
-    protected    boolean  setOpenLazyLoad(){
+    protected boolean setOpenLazyLoad() {
         return false;
     }
 
     /***
      * 子类刷新回调调用该方法
-     * **/
+     **/
     public void getBaseOnRefresh() {
         daraPage = 1;
         getPresenter().setLoadData(daraPage);
@@ -128,8 +128,6 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
         daraPage += 1;
         getPresenter().setLoadData(daraPage);
     }
-
-
 
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
@@ -146,12 +144,12 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
             adapter.addData(data);
         }
 
-
     }
 
     /***
      * 错误
-     * @param  e  错误
+     *
+     * @param e 错误
      **/
     public void setError(Throwable e) {
         if (daraPage < 2) {
@@ -161,10 +159,14 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
         }
 
     }
-
+    @Override
+    public int getCurPage() {
+        return daraPage;
+    }
     /**
      * 获取RecyclerView
      **/
+    @Override
     public RecyclerView getRecyclerView() {
         return recyclerView;
     }
@@ -172,13 +174,16 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
     /**
      * 获取数据适配器实例
      **/
-    public  QuickDataAdapter getAdapter() {
+    @Override
+    public QuickDataAdapter getAdapter() {
         return adapter;
     }
+
     /***
      * 获取加载管理类
      */
-    public LoadViewHelper getLoadViewHelper() {
+    @Override
+    public LoadViewHelper getViewLoadHelper() {
         return helper;
     }
 
@@ -194,36 +199,10 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
     }
 
     /***
-     * 内容布局id
-     ***/
-    public abstract int getContentLayout();
-    /***
-     * 设置网格中的列数
-     * 子类重写该方法 大于0 使用网格布局 否则L是list
-     */
-    public int setGridSpanCount() {
-        return 0;
-    }
-    /***
-     * 获取item数据layoutId
-     **/
-    public abstract int getItemLayout();
-
-    /****
-     * BaseViewHolder 实现item 布局内容
-     *
-     * @param helper BaseViewHolder
-     * @param item   数据
-     **/
-    public abstract void convertViewHolder(BaseViewHolder helper, M item);
-
-
-
-    /***
      * 数据式适配器
      ****/
     private class QuickDataAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-        public QuickDataAdapter() {
+        QuickDataAdapter() {
             super(getItemLayout());
         }
 
@@ -232,7 +211,6 @@ public abstract class AacCustomListFragment<P extends AacCustomFLPresenter, M> e
             convertViewHolder(helper, item);
         }
     }
-
 
 }
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aac.expansion.R;
+import com.aac.expansion.ener.ViewGetListener;
 import com.aac.module.ui.AacFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -26,7 +27,7 @@ import java.util.List;
  */
 
 public abstract class AacListFragment<P extends AacListFragmentPresenter, M> extends AacFragment<P>
-        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
 
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefresh;
@@ -38,10 +39,11 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
      */
     protected boolean isInit = false;
     protected boolean isLoad = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.aac_recycle_view, container, false);
+        return inflater.inflate(getContentLayout(), container, false);
 
     }
 
@@ -50,7 +52,7 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         super.onViewCreated(view, savedInstanceState);
         swipeRefresh = $(view, R.id.swipeRefresh);
         recyclerView = $(view, R.id.recyclerView);
-        if (setGridSpanCount() == 0) {
+        if (setGridSpanCount() <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), setGridSpanCount()));
@@ -77,9 +79,9 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
             swipeRefresh.setRefreshing(false);
             swipeRefresh.setOnRefreshListener(null);
         }
-        if (helper!=null){
+        if (helper != null) {
             helper.onDestroy();
-            helper=null;
+            helper = null;
         }
     }
 
@@ -91,7 +93,6 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         super.setUserVisibleHint(isVisibleToUser);
         if (setOpenLazyLoad()) isCanLoadData();
     }
-
 
     /**
      * 是否可以加载数据
@@ -113,15 +114,15 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         }
     }
 
-
     /**
      * 开启懒加载
      *
-     * @return  setOpenLazyLoad true  开启 false
+     * @return setOpenLazyLoad true  开启 false
      **/
-    protected    boolean  setOpenLazyLoad(){
+    protected boolean setOpenLazyLoad() {
         return false;
     }
+
 
     @Override
     public void onRefresh() {
@@ -135,17 +136,15 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         getPresenter().setLoadData(daraPage);
     }
 
-
-
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
             adapter.getData().clear();
             adapter.notifyDataSetChanged();
             setRefreshing(false);
             adapter.addData(data);
-            if (data.isEmpty()){
+            if (data.isEmpty()) {
                 helper.showEmpty();
-            }else {
+            } else {
                 helper.showContent();
             }
         } else {
@@ -157,14 +156,15 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
             adapter.addData(data);
         }
 
-
     }
+
     /***
-     *显示数据加载view
-     * **/
-    public void  showLoadView(){
+     * 显示数据加载view
+     **/
+    public void showLoadView() {
         helper.showLoading();
     }
+
     /***
      * 错误
      **/
@@ -174,13 +174,22 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         } else {
             adapter.loadMoreFail();
         }
-
     }
 
+    @Override
+    public  int getContentLayout() {
+        return R.layout.aac_recycle_view;
+    }
+
+    @Override
+    public int getCurPage() {
+        return daraPage;
+    }
 
     /**
      * 获取RecyclerView
      **/
+    @Override
     public RecyclerView getRecyclerView() {
         return recyclerView;
     }
@@ -188,23 +197,25 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
     /**
      * 获取数据适配器实例
      **/
-    public  QuickDataAdapter getAdapter() {
+    @Override
+    public QuickDataAdapter getAdapter() {
         return adapter;
     }
+
     /***
      * 获取加载管理类
      */
-    public LoadViewHelper getHelper() {
+    @Override
+    public LoadViewHelper getViewLoadHelper() {
         return helper;
     }
 
     /***
      * @param refreshing 是否刷新 true   false 则停止
-     *
      **/
     public void setRefreshing(boolean refreshing) {
         swipeRefresh.setRefreshing(refreshing);
-        if (helper!=null){
+        if (helper != null) {
             helper.showContent();
         }
     }
@@ -219,31 +230,12 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
             adapter.setOnLoadMoreListener(this, recyclerView);
         }
     }
-    /***
-     * 设置网格中的列数
-     * 子类重写该方法 大于0 使用网格布局 否则L是list
-     */
-    public int setGridSpanCount() {
-        return 0;
-    }
 
-    /***
-     * 获取item数据layoutId
-     **/
-    public abstract int getItemLayout();
-
-    /****
-     * BaseViewHolder 实现item 布局内容
-     *
-     * @param helper BaseViewHolder
-     * @param item   数据
-     **/
-    public abstract void convertViewHolder(BaseViewHolder helper, M item);
     /***
      * 数据式适配器
      ****/
     private class QuickDataAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-        public QuickDataAdapter() {
+        QuickDataAdapter() {
             super(getItemLayout());
         }
 

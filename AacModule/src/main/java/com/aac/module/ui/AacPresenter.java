@@ -17,11 +17,15 @@ import android.support.v4.app.FragmentActivity;
  * Created by yangc on 2017/8/13.
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:  业务处理控制类
+ *
+ * @param <ActivityType> 与AacPresenter建立订阅View
+ * @see AacPresenter
  */
 
-public abstract class AacPresenter<ActivityType> implements LifecycleObserver{
+public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
     private Lifecycle lifecycle;
     private ActivityType view;
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     protected void onCreate() {
 
@@ -47,9 +51,8 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver{
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     protected void onDestroy() {
-        view=null;
-        lifecycle=null;
-
+        view = null;
+        lifecycle = null;
     }
 
     /***
@@ -76,7 +79,7 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver{
      * 单例获取viewModel方式类型实例
      *
      * @param modelClass modelClass类型
-     * @return     ViewModelType
+     * @return ViewModelType
      **/
     public <ViewModelType extends ViewModel> ViewModelType getInstanceViewModel(Class<ViewModelType> modelClass) {
         return new ViewModelProvider.NewInstanceFactory().create(modelClass);
@@ -86,7 +89,7 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver{
      * 获取数据viewModel方式类型实例
      *
      * @param modelClass modelClass类型
-    * @return  ViewModelType
+     * @return ViewModelType
      **/
     public <ViewModelType extends ViewModel> ViewModelType getViewModel(Class<ViewModelType> modelClass) {
 
@@ -98,27 +101,29 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver{
             return getInstanceViewModel(modelClass);
         }
     }
+
     /***
      * 获取数据viewModel方式类型实例
      *
      * @param modelClass modelClass类型
-     * @return     ViewModelType
+     * @return ViewModelType
      **/
     public <ViewModelType extends ViewModel> ViewModelType getApplicationViewModel(Class<ViewModelType> modelClass) {
 
         if (view instanceof Fragment) {
-            return  new  ViewModelProviders.DefaultFactory(((Fragment)view).getActivity().getApplication()).create(modelClass);
+            return new ViewModelProviders.DefaultFactory(((Fragment) view).getActivity().getApplication()).create(modelClass);
         } else if (view instanceof FragmentActivity) {
-            return  new  ViewModelProviders.DefaultFactory(((Activity)view).getApplication()).create(modelClass);
+            return new ViewModelProviders.DefaultFactory(((Activity) view).getApplication()).create(modelClass);
         } else {
             return getInstanceViewModel(modelClass);
         }
     }
+
     /**
      * 返回是否当前生命中周期状态
      *
      * @param state Lifecycle.State
-     *  @return     boolean
+     * @return boolean
      **/
     public boolean isAtLeast(Lifecycle.State state) {
         return lifecycle.getCurrentState().isAtLeast(state);

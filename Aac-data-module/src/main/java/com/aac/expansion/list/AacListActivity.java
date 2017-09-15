@@ -8,9 +8,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
+import com.aac.expansion.ener.ViewGetListener;
 import com.aac.module.ui.AacActivity;
 import com.aac.module.pres.RequiresPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,8 +27,7 @@ import java.util.List;
 
 @RequiresPresenter(AacDataAPresenter.class)
 public abstract class AacListActivity<P extends AacListPresenter, M> extends AacActivity<P>
-        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
-    private static final String TAG = AacListActivity.class.getName();
+        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener,ViewGetListener<M> {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefresh;
     private QuickDataAdapter adapter;
@@ -37,10 +37,10 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentView());
+        setContentView(getContentLayout());
         swipeRefresh = $(R.id.swipeRefresh);
         recyclerView = $(R.id.recyclerView);
-        if (setGridSpanCount() == 0) {
+        if (setGridSpanCount() <=1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(this, setGridSpanCount()));
@@ -50,7 +50,6 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         adapter.bindToRecyclerView(recyclerView);
         helper = new LoadViewHelper(recyclerView);
          showLoadView();
-        Log.d(TAG, "onCreate");
     }
 
     @Override
@@ -105,7 +104,10 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
 
     }
 
-
+    @Override
+    public int getContentLayout() {
+        return R.layout.aac_recycle_view;
+    }
     /***
      * 错误
      **/
@@ -117,23 +119,20 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         }
     }
 
-
+    @Override
+    public int getCurPage() {
+        return daraPage;
+    }
     /***
      *显示数据加载view
      * **/
     public void  showLoadView(){
         helper.showLoading();
     }
-    /***
-     * 获取当前的分页数
-     ***/
-    public int getCurPage() {
-        return daraPage;
-    }
-
     /**
      * 获取RecyclerView
      **/
+    @Override
     public RecyclerView getRecyclerView() {
         return recyclerView;
     }
@@ -141,6 +140,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     /**
      * 获取数据适配器实例
      **/
+    @Override
     public QuickDataAdapter getAdapter() {
         return adapter;
     }
@@ -148,7 +148,8 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     /***
      * 获取加载管理类
      */
-    public LoadViewHelper getHelper() {
+    @Override
+    public LoadViewHelper getViewLoadHelper() {
         return helper;
     }
 
@@ -162,15 +163,14 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
             helper.showContent();
         }
     }
-
     /***
      * 设置网格中的列数
-     * 子类重写该方法 大于0 使用网格布局 否则L是list
+     * 子类重写该方法 大于1 使用网格布局 否则L是list
      */
+    @Override
     public int setGridSpanCount() {
-        return 0;
+        return 1;
     }
-
     /**
      * 是否启用分页  默认不启用
      *
@@ -181,30 +181,13 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
             adapter.setOnLoadMoreListener(this, recyclerView);
         }
     }
-
-    /****
-     * BaseViewHolder 实现item 布局内容
-     *
-     * @param helper BaseViewHolder
-     * @param item   数据
-     **/
-    public abstract void convertViewHolder(BaseViewHolder helper, M item);
-
-    /***
-     * 获取item数据layoutId
-     **/
-    public abstract int getItemLayout();
-
-    public abstract int getContentView();
-
     /***
      * 数据式适配器
      ****/
     private class QuickDataAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-        public QuickDataAdapter() {
+          QuickDataAdapter() {
             super(getItemLayout());
         }
-
         @Override
         protected void convert(BaseViewHolder helper, M item) {
             convertViewHolder(helper, item);

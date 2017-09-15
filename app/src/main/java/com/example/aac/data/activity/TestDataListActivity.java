@@ -36,7 +36,7 @@ public class TestDataListActivity extends AacListActivity<TestDataListPresenter,
     }
 
     @Override
-    public int getContentView() {
+    public int getContentLayout() {
         return R.layout.test_data_list_actvity;
     }
 

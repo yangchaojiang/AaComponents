@@ -11,9 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
 
 import com.aac.module.R;
 import com.aac.module.pres.PresenterBuilder;
@@ -22,11 +20,14 @@ import com.aac.module.pres.PresenterBuilder;
  * Created by yangc on 2017/8/13.
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated: 控制activity 控制类
+ *
+ * @param <P> 与activity 订阅{@link AacPresenter }类
+ * @see AacActivity
  */
 
-public abstract class AacActivity<L extends AacPresenter> extends AppCompatActivity implements LifecycleRegistryOwner {
+public abstract class AacActivity<P extends AacPresenter> extends AppCompatActivity implements LifecycleRegistryOwner {
     LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-    private L t = PresenterBuilder.fromViewClass(this.getClass());
+    private P t = PresenterBuilder.fromViewClass(this.getClass());
     //如果使用了ToolBar则自动部署。没有则无影响。
     private Toolbar toolbar;
 
@@ -57,6 +58,7 @@ public abstract class AacActivity<L extends AacPresenter> extends AppCompatActiv
 
     public void onSetToolbar(Toolbar toolbar) {
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -88,9 +90,10 @@ public abstract class AacActivity<L extends AacPresenter> extends AppCompatActiv
 
     /***
      * 得到对应业务处理类
+     *
      * @return L
      **/
-    public L getPresenter() {
+    public P getPresenter() {
         return t;
     }
 
@@ -98,25 +101,12 @@ public abstract class AacActivity<L extends AacPresenter> extends AppCompatActiv
      * 返回当前生命中周期状态
      *
      * @param state Lifecycle.State
-     * @return     boolean
+     * @return boolean
      **/
-    public boolean isAtLeast(Lifecycle.State state) {
+    public boolean getState(Lifecycle.State state) {
         return lifecycleRegistry.getCurrentState().isAtLeast(state);
     }
 
-    boolean dispatchPopulateAccessibilityEventSuper(AccessibilityEvent event) {
-        return super.dispatchPopulateAccessibilityEvent(event);
-    }
-
-
-    boolean dispatchTouchEventSuper(MotionEvent ev) {
-        return super.dispatchTouchEvent(ev);
-    }
-
-
-    boolean dispatchTrackballEventSuper(MotionEvent ev) {
-        return super.dispatchTrackballEvent(ev);
-    }
     @Nullable
     protected final <E extends View> E $(@NonNull View view, @IdRes int id) {
         return (E) view.findViewById(id);

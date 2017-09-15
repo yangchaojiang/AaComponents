@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.aac.expansion.ener.ViewGetDataener;
 import com.aac.module.ui.AacFragment;
 import com.helper.loadviewhelper.load.LoadViewHelper;
 
@@ -16,7 +16,7 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  * Deprecated:  Fragment 数据view
  */
 
-public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P> {
+public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P>  implements ViewGetDataener<M> {
     private LoadViewHelper helper;
     /**
      * 视图是否已经初初始化
@@ -77,7 +77,6 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
             }
         }
     }
-
     /**
      * 获取设置的布局
      *
@@ -112,10 +111,10 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
             helper.showError();
         }
     }
-    public LoadViewHelper getHelper() {
+    @Override
+    public LoadViewHelper getLoadViewHelper() {
         return helper;
     }
-
     /***
      * 是否加载中布局
      *
@@ -126,19 +125,5 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
         helper.showLoading();
     }
 
-    /***
-     * 内容布局id
-     ***/
-    public abstract int getContentLayout();
-
-    /***
-     * 返回数据
-     ***/
-    public abstract void setData(@NonNull M data);
-
-    /***
-     * 错误处理
-     **/
-    public abstract void setError(Throwable e);
 
 }

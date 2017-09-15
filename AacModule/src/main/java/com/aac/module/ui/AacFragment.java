@@ -11,19 +11,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.aac.module.pres.PresenterBuilder;
 
 /**
  * Created by yangc on 2017/8/13.
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:
+ *
+ * @param <P> AacFragment 订阅{@link AacFragmentPresenter }类
+ * @see AacFragment
  */
 
-public abstract class AacFragment<R extends AacFragmentPresenter> extends Fragment implements LifecycleRegistryOwner {
-    private static final String TAG = AacFragment.class.getName();
+public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragment implements LifecycleRegistryOwner {
     LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-    private R t = PresenterBuilder.fromViewClass(this.getClass());
+    private P t = PresenterBuilder.fromViewClass(this.getClass());
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,15 +41,15 @@ public abstract class AacFragment<R extends AacFragmentPresenter> extends Fragme
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         t.onCreateView();
+        super.onViewCreated(view, savedInstanceState);
         t.onViewCreated();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        t.onCreateView();
+        t.onDestroyView();
     }
 
     @Override
@@ -66,9 +67,10 @@ public abstract class AacFragment<R extends AacFragmentPresenter> extends Fragme
 
     /***
      * 得到对应业务处理类
-     * @return     R
+     *
+     * @return R
      **/
-   public   R getPresenter() {
+    public P getPresenter() {
         return t;
     }
 
@@ -76,17 +78,18 @@ public abstract class AacFragment<R extends AacFragmentPresenter> extends Fragme
      * 返回是否当前生命中周期状态
      *
      * @param state Lifecycle.State
-     * @return     boolean
+     * @return boolean
      **/
-    public boolean isAtLeast(Lifecycle.State state) {
+    public boolean getState(Lifecycle.State state) {
         return lifecycleRegistry.getCurrentState().isAtLeast(state);
     }
-    protected final <E extends View> E $(@NonNull View view, @IdRes int id){
-        return (E)view.findViewById(id);
+
+    protected final <E extends View> E $(@NonNull View view, @IdRes int id) {
+        return (E) view.findViewById(id);
     }
 
-    protected final <E extends View> E viewId(@NonNull View view,@IdRes int id){
-        return (E)view.findViewById(id);
+    protected final <E extends View> E viewId(@NonNull View view, @IdRes int id) {
+        return (E) view.findViewById(id);
     }
 
 }

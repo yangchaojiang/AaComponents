@@ -17,9 +17,7 @@ public class PresenterBuilder {
             return null;
             //throw new RuntimeException("You must declaration @RequiresPresenter for your Activity");
         }
-
         Class<PresenterType> presenterClass = (Class<PresenterType>) annotation.value();
-
         PresenterType presenter;
         try {
             presenter = presenterClass.newInstance();

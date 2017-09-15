@@ -30,6 +30,7 @@ public class TestDataFragment extends AacDataFragment<TestDataFragmentPresenter,
         super.onViewCreated(view, savedInstanceState);
         textView2 = $(view, R.id.textView);
         showLoading($(view,R.id.textViewlayout));
+
     }
 
 
@@ -43,7 +44,8 @@ public class TestDataFragment extends AacDataFragment<TestDataFragmentPresenter,
 
     }
 
-
-
-
+    @Override
+    protected boolean setOpenLazyLoad() {
+        return true;
+    }
 }

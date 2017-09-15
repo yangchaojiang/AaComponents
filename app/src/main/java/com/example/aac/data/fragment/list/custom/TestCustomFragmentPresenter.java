@@ -10,7 +10,7 @@ import com.example.aac.model.TestDataViewModel;
  */
 
 public class TestCustomFragmentPresenter extends AacCustomFLPresenter<TestCustomListFragment, String> {
-    public static final String TAG = "TestFragmentPresenter";
+    public static final String TAG = TestCustomFragmentPresenter.class.getName();
     private TestDataViewModel viewModel;
 
     @Override

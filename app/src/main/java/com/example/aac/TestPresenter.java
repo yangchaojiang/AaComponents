@@ -10,8 +10,8 @@ import com.aac.module.ui.AacPresenter;
  * Deprecated:
  */
 
-public class Testprenter extends AacPresenter<MainActivity> {
-    public static final String TAG = "Testprenter";
+public class TestPresenter extends AacPresenter<MainActivity> {
+    public static final String TAG = "TestPresenter";
 
     @Override
     public void onCreate() {
@@ -24,4 +24,6 @@ public class Testprenter extends AacPresenter<MainActivity> {
         super.onCreateView();
         Log.d(TAG,"onCreateView");
     }
+
+
 }

@@ -10,8 +10,8 @@ import com.example.aac.data.activity.TestDataActivity;
 import com.example.aac.data.activity.TestDataListActivity;
 import com.example.aac.data.fragment.TestFragmentActivity;
 
-@RequiresPresenter(Testprenter.class)
-public class MainActivity extends AacActivity<Testprenter> {
+@RequiresPresenter(TestPresenter.class)
+public class MainActivity extends AacActivity<TestPresenter> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

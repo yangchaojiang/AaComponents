@@ -2,6 +2,7 @@ package com.aac.expansion.data;
 
 
 import android.arch.lifecycle.Observer;
+import android.support.annotation.NonNull;
 
 import com.aac.module.ui.AacPresenter;
 
@@ -16,9 +17,9 @@ public class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresente
         @Override
         public void onChanged(M m) {
             if (m != null) {
-                getView().setData(m);
+                getView().setBaseData(m);
             } else {
-                getView().setError(new Throwable(new NullPointerException()));
+                getView().setBaseError(new Throwable(new NullPointerException()));
             }
         }
     };
@@ -32,8 +33,8 @@ public class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresente
     /***
      * 手动发布数据
      **/
-    public void postData(M data) {
-        getView().setData(data);
+    public void postData(@NonNull M data) {
+        getView().setBaseData(data);
     }
     /**
      * 订阅

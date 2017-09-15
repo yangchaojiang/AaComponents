@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
+import com.aac.expansion.ener.ViewGetListener;
 import com.aac.module.pres.RequiresPresenter;
 import com.aac.module.ui.AacActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,7 +27,7 @@ import java.util.List;
 
 @RequiresPresenter(AacDataAPresenter.class)
 public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> extends AacActivity<P>
-        implements BaseQuickAdapter.RequestLoadMoreListener {
+        implements BaseQuickAdapter.RequestLoadMoreListener,ViewGetListener<M> {
     private RecyclerView recyclerView;
     private QuickDataAdapter adapter;
     private int daraPage = 1;
@@ -35,9 +36,9 @@ public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> e
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentView());
+        setContentView(getContentLayout());
         recyclerView = $(R.id.recyclerView);
-        if (setGridSpanCount() == 0) {
+        if (setGridSpanCount() <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(this, setGridSpanCount()));
@@ -47,7 +48,6 @@ public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> e
         adapter.setEmptyView(R.layout.aac_view_list_con_empty);
         helper = new LoadViewHelper(recyclerView);
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -55,13 +55,11 @@ public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> e
             adapter.getData().clear();
             adapter.setOnLoadMoreListener(null, recyclerView);
         }
-
         if (helper != null) {
             helper.onDestroy();
             helper = null;
         }
     }
-
     /***
      * 子类刷新回调调用该方法
      * **/
@@ -69,7 +67,6 @@ public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> e
         daraPage = 1;
         getPresenter().setLoadData(daraPage);
     }
-
     @Override
     public void onLoadMoreRequested() {
         daraPage += 1;
@@ -104,42 +101,22 @@ public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> e
         }
     }
 
-    /***
-     * 获取当前的分页数
-     ***/
+    @Override
     public int getCurPage() {
         return daraPage;
     }
-
-    /**
-     * 获取RecyclerView
-     **/
+    @Override
     public RecyclerView getRecyclerView() {
         return recyclerView;
     }
-
-    /**
-     * 获取数据适配器实例
-     **/
+    @Override
     public QuickDataAdapter getAdapter() {
         return adapter;
     }
-
-    /***
-     * 获取加载管理类
-     */
+    @Override
     public LoadViewHelper getViewLoadHelper() {
         return helper;
     }
-
-    /***
-     * 设置网格中的列数
-     * 子类重写该方法 大于0 使用网格布局 否则L是list
-     */
-    public int setGridSpanCount() {
-        return 0;
-    }
-
     /**
      * 是否启用分页  默认不启用
      *
@@ -151,26 +128,11 @@ public abstract class AacCustomListActivity<P extends AacCustomALPresenter, M> e
         }
     }
 
-    /****
-     * BaseViewHolder 实现item 布局内容
-     *
-     * @param helper BaseViewHolder
-     * @param item   数据
-     **/
-    public abstract void convertViewHolder(BaseViewHolder helper, M item);
-
-    /***
-     * 获取item数据layoutId
-     **/
-    public abstract int getItemLayout();
-
-    public abstract int getContentView();
-
     /***
      * 数据式适配器
      ****/
     private class QuickDataAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-        public QuickDataAdapter() {
+          QuickDataAdapter() {
             super(getItemLayout());
         }
 

@@ -1,6 +1,8 @@
 package com.example.aac.data.fragment.data;
 
 
+import android.util.Log;
+
 import com.aac.expansion.data.AacDataFPresenter;
 import com.example.aac.model.TestDataViewModel;
 
@@ -19,11 +21,13 @@ public class TestDataFragmentPresenter extends AacDataFPresenter<TestDataFragmen
     protected void onCreateView() {
         super.onCreateView();
         viewModel=getViewModel(TestDataViewModel.class);
+        Log.d(TAG,"onCreateView");
 
     }
 
     @Override
     protected void lazyLoad() {
-        viewModel.getData().observe(getView(),getDataSubscriber());
+       viewModel.getData().observe(getView(),getDataSubscriber());
+        Log.d(TAG,"lazyLoad");
     }
 }
