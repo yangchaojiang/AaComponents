@@ -8,8 +8,7 @@ import android.view.View;
 import com.aac.module.ui.AacActivity;
 import com.example.aac.R;
 import com.example.aac.data.fragment.data.Test2FragmentActivity;
-import com.example.aac.data.fragment.list.custom.TestCustomFragmentActivity;
-import com.example.aac.data.fragment.list.defaults.TestDataFragmentActivity;
+import com.example.aac.data.fragment.list.TestDataFragmentActivity;
 
 /**
  * Created by yangc on 2017/8/27.
@@ -40,13 +39,6 @@ public class TestFragmentActivity extends AacActivity {
 
             }
         });
-        findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TestFragmentActivity.this, TestCustomFragmentActivity.class);
-                startActivity(intent);
 
-            }
-        });
     }
 }

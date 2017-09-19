@@ -17,29 +17,26 @@ import com.example.aac.R;
 @RequiresPresenter(TestDataListPresenter.class)
 public class TestDataListActivity extends AacListActivity<TestDataListPresenter, String> {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setLoadMore(true);
-    }
+           setLoadMore(true);
+          setRefreshing(true);
 
+    }
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         getSupportActionBar().setTitle("列表数据");
     }
-
     @Override
     public int getItemLayout() {
         return android.R.layout.simple_list_item_2;
     }
-
     @Override
     public int getContentLayout() {
         return R.layout.test_data_list_actvity;
     }
-
     @Override
     public void convertViewHolder(BaseViewHolder helper, String item) {
         helper.setText(android.R.id.text1, item);

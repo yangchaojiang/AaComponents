@@ -15,9 +15,11 @@ public class TestDataListPresenter extends AacListPresenter<TestDataListActivity
     protected void onCreate() {
         super.onCreate();
         viewModel = getViewModel(TestDataViewModel.class);
-        viewModel.getListData(1).observe(getView(), getDataSubscriber());
-    }
 
+    }
+    /***
+     * 没有进入页面没有开启刷新需要说手动调用
+     * **/
     @Override
     public void setLoadData(int pager) {
         viewModel.getListData(pager).observe(getView(), getDataSubscriber());

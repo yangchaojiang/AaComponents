@@ -23,7 +23,7 @@
             android:name=".data.activity.TestDataListActivity"
               />
         <activity
-            android:name=".data.fragment.list.defaults.TestDataFragmentActivity"
+            android:name=".data.fragment.list.TestDataFragmentActivity"
              />
         <activity
             android:name=".data.fragment.data.Test2FragmentActivity"

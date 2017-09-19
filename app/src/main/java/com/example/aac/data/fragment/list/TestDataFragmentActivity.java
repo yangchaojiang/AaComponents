@@ -1,4 +1,4 @@
-package com.example.aac.data.fragment.list.defaults;
+package com.example.aac.data.fragment.list;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
