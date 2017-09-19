@@ -44,7 +44,7 @@ publish {
     repoName="ycjiang"
     groupId = 'com.ycjiang'
     artifactId = 'AaDataModule'
-    publishVersion = '1.0.5'
+    publishVersion = '1.0.6'
     desc = 'Based on google Android Architecture Components package to achieve MVP rapid development framework for data management'
     website = 'https://github.com/yangchaojiang/AaComponents'
 }

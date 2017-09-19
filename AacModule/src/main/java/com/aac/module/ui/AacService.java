@@ -32,5 +32,4 @@ public abstract class AacService<P extends AacPresenter> extends LifecycleServic
         return super.onStartCommand(intent, flags, startId);
     }
 
-
 }

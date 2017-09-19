@@ -14,7 +14,7 @@ class TestListPresenter : AacListPresenter<TestListActivity, String>(){
     override fun onCreate() {
         super.onCreate()
         viewModel=getViewModel(TestDataViewModel::class.java)
-        viewModel?.getListData(1)?.observe(view,dataSubscriber)
+        setLoadData(1);
     }
     override fun setLoadData(pager: Int) {
         viewModel?.getListData(pager)?.observe(view,dataSubscriber)

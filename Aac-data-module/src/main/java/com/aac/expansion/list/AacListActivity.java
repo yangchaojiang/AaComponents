@@ -17,6 +17,7 @@ import com.aac.module.pres.RequiresPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.helper.loadviewhelper.load.LoadViewHelper;
+
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ import java.util.List;
 
 @RequiresPresenter(AacDataAPresenter.class)
 public abstract class AacListActivity<P extends AacListPresenter, M> extends AacActivity<P>
-        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener,ViewGetListener<M> {
+        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefresh;
     private QuickDataAdapter adapter;
@@ -40,7 +41,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         setContentView(getContentLayout());
         swipeRefresh = $(R.id.swipeRefresh);
         recyclerView = $(R.id.recyclerView);
-        if (setGridSpanCount() <=1) {
+        if (setGridSpanCount() <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(this, setGridSpanCount()));
@@ -49,7 +50,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         adapter = new QuickDataAdapter();
         adapter.bindToRecyclerView(recyclerView);
         helper = new LoadViewHelper(recyclerView);
-         showLoadView();
+        showLoadView();
     }
 
     @Override
@@ -83,14 +84,14 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
 
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
-          if (!swipeRefresh.isRefreshing()) {
+            if (!swipeRefresh.isRefreshing()) {
                 helper.showContent();
-            }else {
-              setRefreshing(false);
+            } else {
+                setRefreshing(false);
             }
-             adapter.getData().clear();
-             adapter.notifyDataSetChanged();
-            if (data.isEmpty()){
+            adapter.getData().clear();
+            adapter.notifyDataSetChanged();
+            if (data.isEmpty()) {
                 helper.showEmpty();
             }
         } else {
@@ -108,6 +109,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     public int getContentLayout() {
         return R.layout.aac_recycle_view;
     }
+
     /***
      * 错误
      **/
@@ -123,12 +125,14 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     public int getCurPage() {
         return daraPage;
     }
+
     /***
-     *显示数据加载view
-     * **/
-    public void  showLoadView(){
+     * 显示数据加载view
+     **/
+    public void showLoadView() {
         helper.showLoading();
     }
+
     /**
      * 获取RecyclerView
      **/
@@ -154,15 +158,27 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     }
 
     /***
-     * 是否下拉刷新
-     * @param  setRefreshing  true 开始刷新 false 停滞
+     * 进入页面开启是否下拉刷新
+     *
+     * @param setRefreshing true 开始刷新 false 停滞
      **/
-    public void setRefreshing(boolean setRefreshing) {
-        swipeRefresh.setRefreshing(setRefreshing);
-        if (helper!=null){
+    public void setRefreshing(final boolean setRefreshing) {
+        if (helper != null) {
             helper.showContent();
         }
+        swipeRefresh.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (swipeRefresh == null) return;
+                swipeRefresh.setRefreshing(setRefreshing);
+                if (setRefreshing) {
+                    onRefresh();
+                }
+            }
+        }, 200);
+
     }
+
     /***
      * 设置网格中的列数
      * 子类重写该方法 大于1 使用网格布局 否则L是list
@@ -171,6 +187,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     public int setGridSpanCount() {
         return 1;
     }
+
     /**
      * 是否启用分页  默认不启用
      *
@@ -181,13 +198,15 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
             adapter.setOnLoadMoreListener(this, recyclerView);
         }
     }
+
     /***
      * 数据式适配器
      ****/
     private class QuickDataAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-          QuickDataAdapter() {
+        QuickDataAdapter() {
             super(getItemLayout());
         }
+
         @Override
         protected void convert(BaseViewHolder helper, M item) {
             convertViewHolder(helper, item);
