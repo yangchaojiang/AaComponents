@@ -1,12 +1,13 @@
 package com.aac.expansion.data;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.aac.expansion.ener.ViewGetDataener;
+import com.aac.expansion.ener.ViewGetDataListener;
 import com.aac.module.ui.AacFragment;
 import com.helper.loadviewhelper.load.LoadViewHelper;
 
@@ -16,7 +17,7 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  * Deprecated:  Fragment 数据view
  */
 
-public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P>  implements ViewGetDataener<M> {
+public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P>  implements ViewGetDataListener<M> {
     private LoadViewHelper helper;
     /**
      * 视图是否已经初初始化
@@ -30,14 +31,16 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
         return inflater.inflate(getContentLayout(), container, false);
     }
 
+    @CallSuper
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         isInit = true;
-        /**初始化的时候去加载数据**/
-        if (setOpenLazyLoad()) isCanLoadData();
+        //初始化的时候去加载数据
+        if(setOpenLazyLoad())isCanLoadData();
     }
 
+    @CallSuper
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -51,6 +54,7 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
     /**
      * 视图是否已经对用户可见，系统的方法
      */
+    @CallSuper
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

@@ -22,6 +22,7 @@ public class TestDataFragment extends AacDataFragment<TestDataFragmentPresenter,
 
     @Override
     public int getContentLayout() {
+
         return R.layout.test_data_fragment_view;
     }
 

@@ -12,7 +12,7 @@ import com.example.aac.model.TestDataViewModel;
  */
 
 public class TesDataPresenter extends AacDataAPresenter<TestDataActivity, String> {
-    public static final String TAG = "TesDataPresenter";
+    public static final String TAG = "TesDataBindPresenter";
     private TestDataViewModel dataViewModel;
 
     @Override
@@ -26,5 +26,8 @@ public class TesDataPresenter extends AacDataAPresenter<TestDataActivity, String
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+    public void  getLoad(){
+        dataViewModel.getData().observe(getView(), getDataSubscriber());
     }
 }

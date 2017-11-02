@@ -7,6 +7,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.os.SystemClock;
 import android.util.Log;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +32,14 @@ public class TestDataViewModel extends AndroidViewModel {
             @Override
             public void run() {
                 SystemClock.sleep(1000);
-                data.postValue("撒的阿萨德");
+                data.postValue(null);
             }
         });
         s.start();
         return data;
     }
+
+
 
     @Override
     protected void onCleared() {
@@ -49,9 +52,9 @@ public class TestDataViewModel extends AndroidViewModel {
             @Override
             public void run() {
                 SystemClock.sleep(2000);
-                int s = (page-1)*40;
+                int s = (page - 1) * 40;
                 List<String> list = new ArrayList<>();
-                for (int i=s; i < 40*page; i++) {
+                for (int i = s; i < 40 * page; i++) {
                     list.add("数据：" + i);
                 }
                 listData.postValue(list);

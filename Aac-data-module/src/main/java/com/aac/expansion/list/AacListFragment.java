@@ -1,6 +1,7 @@
 package com.aac.expansion.list;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,7 +22,9 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
 import java.util.List;
 
 /**
- * Created by yangc on 2017/8/14.
+ *
+ * @author yangc
+ * date 2017/8/14
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated: 列表Fragment 支持懒加载， 子类重写setOpenLazyLoad方法，开启懒加载
  */
@@ -47,6 +50,7 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
 
     }
 
+    @CallSuper
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -63,10 +67,10 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         helper = new LoadViewHelper(swipeRefresh);
         showLoadView();
         isInit = true;
-        /**初始化的时候去加载数据**/
+        //初始化的时候去加载数据*
         if (setOpenLazyLoad()) isCanLoadData();
     }
-
+    @CallSuper
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -88,6 +92,7 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
     /**
      * 视图是否已经对用户可见，系统的方法
      */
+    @CallSuper
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -155,7 +160,6 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
             }
             adapter.addData(data);
         }
-
     }
 
     /***
@@ -167,6 +171,7 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
 
     /***
      * 错误
+     * @param  e 错误
      **/
     public void setError(Throwable e) {
         if (daraPage < 2) {

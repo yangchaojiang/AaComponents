@@ -17,21 +17,18 @@ import java.util.List;
 
 public abstract class AacListPresenter<V extends AacListActivity, M> extends AacPresenter<V> {
 
-    private Observer<List<M>> observeForever = new Observer<List<M>>() {
-
-        @Override
-        public void onChanged(@Nullable List<M> ms) {
-            if (ms != null) {
-                getView().setData(ms);
-            } else {
-                getView().setError(new Throwable(new NullPointerException()));
-            }
+    private Observer<List<M>> observeForever = ms -> {
+        if (ms != null) {
+            getView().setData(ms);
+        } else {
+            getView().setError(new Throwable(new NullPointerException()));
         }
     };
 
 
     /**
      * 订阅
+     * @return Observer
      ***/
     public Observer<List<M>> getDataSubscriber() {
         return observeForever;
@@ -39,6 +36,7 @@ public abstract class AacListPresenter<V extends AacListActivity, M> extends Aac
 
     /***
      * 手动发布数据
+     * @param  data 数据
      **/
     public void postValue(@NonNull List<M> data) {
         getView().setData(data);

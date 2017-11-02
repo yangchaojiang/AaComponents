@@ -6,9 +6,11 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,6 +33,7 @@ public abstract class AacActivity<P extends AacPresenter> extends AppCompatActiv
     //如果使用了ToolBar则自动部署。没有则无影响。
     private Toolbar toolbar;
 
+    @CallSuper
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,7 @@ public abstract class AacActivity<P extends AacPresenter> extends AppCompatActiv
 
     }
 
+    @CallSuper
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -63,18 +67,20 @@ public abstract class AacActivity<P extends AacPresenter> extends AppCompatActiv
     }
 
 
+    @CallSuper
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         t.onSave(outState);
     }
-
+    @CallSuper
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         t.onResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @CallSuper
     @Override
     protected void onDestroy() {
         super.onDestroy();

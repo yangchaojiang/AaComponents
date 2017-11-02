@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AaComponents.iml" filepath="$PROJECT_DIR$/AaComponents.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Aac-data-binding/Aac-data-binding.iml" filepath="$PROJECT_DIR$/Aac-data-binding/Aac-data-binding.iml" />
       <module fileurl="file://$PROJECT_DIR$/Aac-data-module/Aac-data-module.iml" filepath="$PROJECT_DIR$/Aac-data-module/Aac-data-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Aac-kotlin-data-module/Aac-kotlin-data-module.iml" filepath="$PROJECT_DIR$/Aac-kotlin-data-module/Aac-kotlin-data-module.iml" />
       <module fileurl="file://$PROJECT_DIR$/AacModule/AacModule.iml" filepath="$PROJECT_DIR$/AacModule/AacModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/kotlinTest/kotlinTest.iml" filepath="$PROJECT_DIR$/kotlinTest/kotlinTest.iml" />

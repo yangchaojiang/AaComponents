@@ -2,12 +2,15 @@ package com.aac.expansion.list;
 
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
@@ -35,6 +38,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     private int daraPage = 1;
     private LoadViewHelper helper;
 
+    @CallSuper
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         showLoadView();
     }
 
+    @CallSuper
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -69,6 +74,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
             helper = null;
         }
     }
+
 
     @Override
     public void onRefresh() {
@@ -112,6 +118,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
 
     /***
      * 错误
+     * @param e 信息
      **/
     public void setError(Throwable e) {
         if (daraPage < 2) {
@@ -166,14 +173,11 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         if (helper != null) {
             helper.showContent();
         }
-        swipeRefresh.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (swipeRefresh == null) return;
-                swipeRefresh.setRefreshing(setRefreshing);
-                if (setRefreshing) {
-                    onRefresh();
-                }
+        swipeRefresh.postDelayed(() -> {
+            if (swipeRefresh == null) return;
+            swipeRefresh.setRefreshing(setRefreshing);
+            if (setRefreshing) {
+                onRefresh();
             }
         }, 200);
 
@@ -211,6 +215,16 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         protected void convert(BaseViewHolder helper, M item) {
             convertViewHolder(helper, item);
         }
+
+
+
+        @Override
+        protected BaseViewHolder createBaseViewHolder(View view) {
+
+            return super.createBaseViewHolder(view);
+        }
+
+
     }
 
 }

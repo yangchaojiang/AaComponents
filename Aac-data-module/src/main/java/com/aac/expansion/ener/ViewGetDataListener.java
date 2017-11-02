@@ -11,12 +11,13 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  */
 
 
-public interface ViewGetDataener<M> {
+public interface ViewGetDataListener<M> {
     
     LoadViewHelper getLoadViewHelper();
 
     /***
      * 内容布局id
+     * @return int
      ***/
     int getContentLayout();
 

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragme
     LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private P t = PresenterBuilder.fromViewClass(this.getClass());
 
+    @CallSuper
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragme
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    @CallSuper
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         t.onCreateView();
@@ -46,12 +49,14 @@ public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragme
         t.onViewCreated();
     }
 
+    @CallSuper
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         t.onDestroyView();
     }
 
+    @CallSuper
     @Override
     public void onDestroy() {
         super.onDestroy();

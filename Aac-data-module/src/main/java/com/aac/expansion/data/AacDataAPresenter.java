@@ -13,14 +13,11 @@ import com.aac.module.ui.AacPresenter;
  */
 
 public class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresenter<V> {
-    private Observer<M> observeForever = new Observer<M>() {
-        @Override
-        public void onChanged(M m) {
-            if (m != null) {
-                getView().setBaseData(m);
-            } else {
-                getView().setBaseError(new Throwable(new NullPointerException()));
-            }
+    private Observer<M> observeForever = m -> {
+        if (m != null) {
+            getView().setBaseData(m);
+        } else {
+            getView().setBaseError(new Throwable(new NullPointerException()));
         }
     };
 
@@ -32,12 +29,15 @@ public class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresente
 
     /***
      * 手动发布数据
+     * @param  data 数据
+     *
      **/
     public void postData(@NonNull M data) {
         getView().setBaseData(data);
     }
     /**
      * 订阅
+     * @return   Observer
      ***/
     public Observer<M> getDataSubscriber() {
         return observeForever;

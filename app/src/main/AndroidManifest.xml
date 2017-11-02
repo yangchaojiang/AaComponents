@@ -29,10 +29,8 @@
             android:name=".data.fragment.data.Test2FragmentActivity"
             />
         <activity android:name=".data.fragment.TestFragmentActivity" />
-        <activity
-            android:name=".data.fragment.list.custom.TestCustomFragmentActivity"
-            />
 
+        <activity android:name=".data.bing.TestDataBindActivity" />
     </application>
 
 </manifest>
