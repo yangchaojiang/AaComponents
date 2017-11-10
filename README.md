@@ -14,12 +14,12 @@ AaComponents 是一套基于MVP模式的快速开发框架。定义了一套开�
 ```
    repositories {
         jcenter()
-        maven { url "https://jitpack.io" }
         maven { url 'https://maven.google.com' }
 
 
     }
 ```
-
+### 使用插件快速生成aac模板代码[戳我](https://github.com/yangchaojiang/AAcHelper)
+  
 #### More
 Find more details about Matisse in [wiki](https://github.com/yangchaojiang/AaComponents/wiki)
