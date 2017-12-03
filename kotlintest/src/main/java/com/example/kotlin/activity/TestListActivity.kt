@@ -25,9 +25,7 @@ class TestListActivity : AacListActivity<TestListPresenter, String>() {
         return  android.R.layout.simple_expandable_list_item_2
     }
 
-    override fun getContentLayout(): Int {
-      return  R.layout.activity_test_list
-    }
+    override fun getContentLayoutId(): Int = R.layout.activity_test_list
 
 
 }

@@ -1,9 +1,12 @@
 package com.example.aac.data.activity;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.aac.expansion.data.AacDataAPresenter;
 import com.example.aac.model.TestDataViewModel;
+
 
 /**
  * Created by yangc on 2017/8/13.
@@ -12,22 +15,23 @@ import com.example.aac.model.TestDataViewModel;
  */
 
 public class TesDataPresenter extends AacDataAPresenter<TestDataActivity, String> {
-    public static final String TAG = "TesDataBindPresenter";
+    public static final String TAG = TesDataPresenter.class.getName();
     private TestDataViewModel dataViewModel;
 
     @Override
     public void onCreate() {
-        super.onCreate();
         Log.d(TAG, "onCreate");
         dataViewModel = getApplicationViewModel(TestDataViewModel.class);
-        dataViewModel.getData().observe(getView(), getDataSubscriber());
+        getLoad();
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void retryData() {
+        getLoad();
     }
-    public void  getLoad(){
+
+    public void getLoad() {
         dataViewModel.getData().observe(getView(), getDataSubscriber());
     }
 }

@@ -11,12 +11,12 @@ import com.example.aac.model.TestDataViewModel;
 
 public class TestDataBindListPresenter extends AacListPresenter<TestDataBindListActivity, String> {
     private TestDataViewModel viewModel;
-    @Override
-    protected void onCreate() {
-        super.onCreate();
-        viewModel = getViewModel(TestDataViewModel.class);
 
+    @Override
+    public void onCreate() {
+        viewModel = getViewModel(TestDataViewModel.class);
     }
+
     /***
      * 没有进入页面没有开启刷新需要说手动调用
      * **/

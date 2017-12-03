@@ -42,4 +42,5 @@ public class TestListFragment extends AacListFragment<TestFragmentPresenter, Str
     protected boolean setOpenLazyLoad() {
         return true;
     }
+
 }

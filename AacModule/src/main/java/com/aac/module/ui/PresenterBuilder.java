@@ -1,7 +1,10 @@
-package com.aac.module.pres;
+package com.aac.module.ui;
 
 
-import com.aac.module.ui.AacPresenter;
+import android.arch.lifecycle.LifecycleOwner;
+import android.support.annotation.NonNull;
+
+import com.aac.module.pres.RequiresPresenter;
 
 /**
  * Created by yangc on 2017/8/13.
@@ -10,8 +13,8 @@ import com.aac.module.ui.AacPresenter;
  */
 public class PresenterBuilder {
 
-    public static <PresenterType extends AacPresenter> PresenterType fromViewClass(Class<?> viewClass) {
-        RequiresPresenter annotation = viewClass.getAnnotation(RequiresPresenter.class);
+    public static <PresenterType extends AacPresenter> PresenterType fromViewClass(@NonNull LifecycleOwner viewClass) {
+        RequiresPresenter annotation = viewClass.getClass().getAnnotation(RequiresPresenter.class);
         //noinspection unchecked
         if (annotation == null) {
             return null;
@@ -21,10 +24,11 @@ public class PresenterBuilder {
         PresenterType presenter;
         try {
             presenter = presenterClass.newInstance();
+            presenter.create(viewClass);
         } catch (InstantiationException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("PresenterBuilder Find generic failed:"+e);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("PresenterBuilder Find generic failed:"+e);
         }
         return presenter;
     }

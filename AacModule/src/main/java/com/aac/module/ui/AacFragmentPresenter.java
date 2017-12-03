@@ -11,15 +11,14 @@ package com.aac.module.ui;
  */
 
 
-public class AacFragmentPresenter<FragmentType extends AacFragment> extends AacPresenter<FragmentType> {
+public abstract class AacFragmentPresenter<FragmentType extends AacFragment> extends AacPresenter<FragmentType> {
 
 
-
-    protected void onDestroyView() {
+    public void onDestroyView() {
 
     }
 
-    protected void onViewCreated() {
+    public void onViewCreated() {
     }
 
 

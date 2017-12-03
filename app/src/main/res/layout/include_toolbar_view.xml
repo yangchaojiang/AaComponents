@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.center.toolbar.TitleToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?colorPrimary"
+    app:backIcon="@drawable/ic_chevron_left_black_24dp"
+    app:titleTextColor="@android:color/white"
+    app:title_gravity="center" />

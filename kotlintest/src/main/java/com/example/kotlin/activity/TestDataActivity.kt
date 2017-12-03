@@ -12,16 +12,14 @@ import kotlinx.android.synthetic.main.test_data_activity.*
 @RequiresPresenter(TestDataPresenter::class)
 public  class TestDataActivity : AacDataActivity<TestDataPresenter, String>(){
 
+    override fun getContentLayoutId():Int=  R.layout.test_data_activity
+
     override fun setData(data: String) {
         textView.text=data
     }
 
     override fun setError(e: Throwable?) {
 
-    }
-
-    override fun getContentLayout(): Int {
-        return  R.layout.test_data_activity
     }
 
 }

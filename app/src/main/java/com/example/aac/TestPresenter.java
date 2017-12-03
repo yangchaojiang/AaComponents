@@ -13,11 +13,6 @@ import com.aac.module.ui.AacPresenter;
 public class TestPresenter extends AacPresenter<MainActivity> {
     public static final String TAG = "TestPresenter";
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Log.d(TAG,"onCreate");
-    }
 
     @Override
     protected void onCreateView() {

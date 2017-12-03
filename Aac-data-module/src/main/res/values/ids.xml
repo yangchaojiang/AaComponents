@@ -3,4 +3,5 @@
     <item name="recyclerView" type="id" />
     <item name="swipeRefresh" type="id"/>
     <item name="toolbar" type="id"/>
+    <attr name="colorPrimary" format="color"/>
 </resources>

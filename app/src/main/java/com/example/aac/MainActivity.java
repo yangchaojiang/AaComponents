@@ -2,23 +2,28 @@ package com.example.aac;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.aac.module.ui.AacActivity;
-import com.aac.module.pres.RequiresPresenter;
+import com.center.toolbar.TitleToolbar;
 import com.example.aac.data.activity.TestDataActivity;
 import com.example.aac.data.activity.TestDataListActivity;
 import com.example.aac.data.bing.TestDataBindActivity;
 import com.example.aac.data.fragment.TestFragmentActivity;
 
-@RequiresPresenter(TestPresenter.class)
-public class MainActivity extends AacActivity<TestPresenter> {
-
+public class MainActivity extends AppCompatActivity {
+    private TitleToolbar titleToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        this.titleToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(titleToolbar);
+        ActionBar mActionBar = getSupportActionBar();
+        mActionBar.setDisplayOptions(mActionBar.getDisplayOptions() | ActionBar.DISPLAY_HOME_AS_UP);
+        titleToolbar.setTitle("我的");
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,5 +52,11 @@ public class MainActivity extends AacActivity<TestPresenter> {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
     }
 }

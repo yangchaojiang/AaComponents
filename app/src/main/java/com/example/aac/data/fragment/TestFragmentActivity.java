@@ -18,11 +18,9 @@ import com.example.aac.data.fragment.list.TestDataFragmentActivity;
 
 public class TestFragmentActivity extends AacActivity {
     public static final String TAG = "TestDataFragmentActivity";
-  ;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_fragmen_view);
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,5 +38,10 @@ public class TestFragmentActivity extends AacActivity {
             }
         });
 
+    }
+
+    @Override
+    public int getContentLayoutId() {
+        return R.layout.test_fragmen_view;
     }
 }

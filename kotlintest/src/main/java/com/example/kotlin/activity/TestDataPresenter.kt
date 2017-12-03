@@ -10,19 +10,20 @@ import com.example.kotlin.viewmodel.TestDataViewModel
  */
 
 class TestDataPresenter : AacDataAPresenter<TestDataActivity, String>() {
+    override fun retryData() {
+    }
 
-    var viewModel: TestDataViewModel?=null
+    var viewModel: TestDataViewModel? = null
 
     override fun onCreate() {
         super.onCreate()
-        viewModel=getViewModel(TestDataViewModel::class.java)
+        viewModel = getViewModel(TestDataViewModel::class.java)
     }
+
     override fun onCreateView() {
         super.onCreateView()
-        viewModel?.getData( )?.observe(view,dataSubscriber)
+        viewModel?.getData()?.observe(view, dataSubscriber)
     }
-
-
 
 
 }

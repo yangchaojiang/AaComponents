@@ -3,6 +3,7 @@ package com.example.aac.model;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.LiveDataReactiveStreams;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.SystemClock;
 import android.util.Log;
@@ -24,6 +25,7 @@ public class TestDataViewModel extends AndroidViewModel {
     public TestDataViewModel(Application application) {
         super(application);
         Log.d("TestDataViewModel", "TestDataViewModel");
+
     }
 
     public LiveData<String> getData() {
@@ -32,7 +34,7 @@ public class TestDataViewModel extends AndroidViewModel {
             @Override
             public void run() {
                 SystemClock.sleep(1000);
-                data.postValue(null);
+                data.postValue("获取数据");
             }
         });
         s.start();

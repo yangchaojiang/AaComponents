@@ -36,14 +36,13 @@ public abstract class AacListBindActivity<P extends AacListBindPresenter, M> ext
     private QuickDataAdapter adapter;
     private int daraPage = 1;
     private LoadViewHelper helper;
-      ViewDataBinding viewDataBinding;
+    ViewDataBinding viewDataBinding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentLayout());
-        viewDataBinding = DataBindingUtil.setContentView(this, getContentLayout());
-        swipeRefresh = $(R.id.swipeRefresh);
-        recyclerView = $(R.id.recyclerView);
+        viewDataBinding = DataBindingUtil.setContentView(this, getContentLayoutId());
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        recyclerView = findViewById(R.id.recyclerView);
         if (setGridSpanCount() <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         } else {
@@ -52,15 +51,10 @@ public abstract class AacListBindActivity<P extends AacListBindPresenter, M> ext
         swipeRefresh.setOnRefreshListener(this);
         adapter = new QuickDataAdapter();
         adapter.bindToRecyclerView(recyclerView);
-      //  helper = new LoadViewHelper(recyclerView);
+        //  helper = new LoadViewHelper(recyclerView);
         showLoadView();
     }
-    /***
-     * 获取
-     * ***/
-    public <T extends ViewDataBinding> T getDataBind() {
-        return (T) viewDataBinding;
-    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -114,13 +108,14 @@ public abstract class AacListBindActivity<P extends AacListBindPresenter, M> ext
     }
 
     @Override
-    public int getContentLayout() {
+    public int getContentLayoutId() {
         return R.layout.aac_recycle_view;
     }
 
     /***
      * 错误
      **/
+    @Override
     public void setError(Throwable e) {
         if (daraPage < 2) {
             helper.showError();
@@ -137,6 +132,7 @@ public abstract class AacListBindActivity<P extends AacListBindPresenter, M> ext
     /***
      * 显示数据加载view
      **/
+    @Override
     public void showLoadView() {
         helper.showLoading();
     }

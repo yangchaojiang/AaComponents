@@ -10,13 +10,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
 import com.aac.expansion.ener.ViewGetListener;
-import com.aac.module.ui.AacActivity;
 import com.aac.module.pres.RequiresPresenter;
+import com.aac.module.ui.AacActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.helper.loadviewhelper.load.LoadViewHelper;
@@ -33,8 +32,7 @@ import java.util.List;
 public abstract class AacListActivity<P extends AacListPresenter, M> extends AacActivity<P>
         implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
     private RecyclerView recyclerView;
-    private SwipeRefreshLayout swipeRefresh;
-    private QuickDataAdapter adapter;
+    protected SwipeRefreshLayout swipeRefresh;
     private int daraPage = 1;
     private LoadViewHelper helper;
 
@@ -42,19 +40,16 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentLayout());
-        swipeRefresh = $(R.id.swipeRefresh);
-        recyclerView = $(R.id.recyclerView);
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        recyclerView = findViewById(R.id.recyclerView);
         if (setGridSpanCount() <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(this, setGridSpanCount()));
         }
         swipeRefresh.setOnRefreshListener(this);
-        adapter = new QuickDataAdapter();
         adapter.bindToRecyclerView(recyclerView);
-        helper = new LoadViewHelper(recyclerView);
-        showLoadView();
+        initLoadHelper(swipeRefresh);
     }
 
     @CallSuper
@@ -88,6 +83,10 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         getPresenter().setLoadData(daraPage);
     }
 
+    /***
+     * 设置数据
+     * @param data data
+     * **/
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
             if (!swipeRefresh.isRefreshing()) {
@@ -112,14 +111,11 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     }
 
     @Override
-    public int getContentLayout() {
+    public int getContentLayoutId() {
         return R.layout.aac_recycle_view;
     }
 
-    /***
-     * 错误
-     * @param e 信息
-     **/
+    @Override
     public void setError(Throwable e) {
         if (daraPage < 2) {
             helper.showError();
@@ -133,12 +129,35 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         return daraPage;
     }
 
+    @Override
+    public void initLoadHelper(@NonNull View view) {
+        helper = new LoadViewHelper(view);
+    }
+
     /***
      * 显示数据加载view
      **/
+    @Override
     public void showLoadView() {
-        helper.showLoading();
+        if (helper != null) {
+            helper.showLoading();
+        }
     }
+
+    @Override
+    public void showErrorView() {
+        if (helper != null) {
+            helper.showError();
+        }
+    }
+
+    @Override
+    public void showContentView() {
+        if (helper != null) {
+            helper.showContent();
+        }
+    }
+
 
     /**
      * 获取RecyclerView
@@ -152,7 +171,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
      * 获取数据适配器实例
      **/
     @Override
-    public QuickDataAdapter getAdapter() {
+    public BaseQuickAdapter getAdapter() {
         return adapter;
     }
 
@@ -206,25 +225,11 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     /***
      * 数据式适配器
      ****/
-    private class QuickDataAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-        QuickDataAdapter() {
-            super(getItemLayout());
-        }
-
+    private BaseQuickAdapter adapter = new BaseQuickAdapter<M, BaseViewHolder>(getItemLayout()) {
         @Override
         protected void convert(BaseViewHolder helper, M item) {
             convertViewHolder(helper, item);
         }
-
-
-
-        @Override
-        protected BaseViewHolder createBaseViewHolder(View view) {
-
-            return super.createBaseViewHolder(view);
-        }
-
-
-    }
+    };
 
 }

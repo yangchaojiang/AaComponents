@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AccModule</string>
+    <string name="aac_layout_error_hint">没有布局文件id</string>
 </resources>

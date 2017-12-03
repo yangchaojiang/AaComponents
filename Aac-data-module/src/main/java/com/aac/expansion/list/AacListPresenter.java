@@ -3,10 +3,7 @@ package com.aac.expansion.list;
 
 import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import com.aac.module.ui.AacPresenter;
-
 import java.util.List;
 
 /**
@@ -24,7 +21,6 @@ public abstract class AacListPresenter<V extends AacListActivity, M> extends Aac
             getView().setError(new Throwable(new NullPointerException()));
         }
     };
-
 
     /**
      * 订阅

@@ -35,7 +35,6 @@ dependencies {
     })
     compile project(':Aac-data-module')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 }
 repositories {

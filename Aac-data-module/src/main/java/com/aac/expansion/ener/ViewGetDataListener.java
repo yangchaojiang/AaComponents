@@ -1,6 +1,7 @@
 package com.aac.expansion.ener;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.helper.loadviewhelper.load.LoadViewHelper;
 
@@ -11,22 +12,9 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  */
 
 
-public interface ViewGetDataListener<M> {
-    
-    LoadViewHelper getLoadViewHelper();
+public interface ViewGetDataListener {
 
-    /***
-     * 内容布局id
-     * @return int
-     ***/
-    int getContentLayout();
-
-    /***
-     * 返回数据
-     *
-     * @param data 数据
-     ***/
-    void setData(@NonNull M data);
+    LoadViewHelper getViewLoadHelper();
 
     /***
      * 错误处理
@@ -35,4 +23,24 @@ public interface ViewGetDataListener<M> {
      **/
     void setError(Throwable e);
 
+    /***
+     * 显示加载中布局
+     * @param contentView 内容布局
+     * ***/
+    void initLoadHelper(@NonNull View contentView);
+
+    /***
+     * 显示加载中布局
+     * ***/
+    void showLoadView();
+
+    /***
+     * 显示错误布局
+     * ***/
+    void showErrorView();
+
+    /***
+     * 显示内容布局
+     * ***/
+    void showContentView();
 }

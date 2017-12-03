@@ -12,20 +12,14 @@ import com.aac.module.ui.AacPresenter;
  * Deprecated:  数据业务
  */
 
-public class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresenter<V> {
+public abstract class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresenter<V> {
     private Observer<M> observeForever = m -> {
         if (m != null) {
             getView().setBaseData(m);
         } else {
-            getView().setBaseError(new Throwable(new NullPointerException()));
+            getView().setError(new Throwable(new NullPointerException()));
         }
     };
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        observeForever = null;
-    }
 
     /***
      * 手动发布数据
@@ -35,12 +29,19 @@ public class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresente
     public void postData(@NonNull M data) {
         getView().setBaseData(data);
     }
+
     /**
      * 订阅
-     * @return   Observer
+     *
+     * @return Observer
      ***/
     public Observer<M> getDataSubscriber() {
         return observeForever;
     }
+
+    /**
+     * 点击重试加载
+     **/
+    public abstract void retryData();
 
 }

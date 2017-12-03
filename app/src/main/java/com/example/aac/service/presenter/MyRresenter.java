@@ -11,8 +11,5 @@ import com.example.aac.service.ui.MYService;
 
 public class MyRresenter extends AacPresenter<MYService> {
 
-    @Override
-    protected void onCreate() {
-        super.onCreate();
-    }
+
 }

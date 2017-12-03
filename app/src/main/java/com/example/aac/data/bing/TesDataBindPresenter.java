@@ -12,6 +12,7 @@ import com.example.aac.databinding.TestDataViewBinding;
  */
 
 public class TesDataBindPresenter extends AacDataBindAPresenter<TestDataBindActivity> {
+
     public static final String TAG = "TesDataBindPresenter";
     private DataBindViewModel dataViewModel;
     private   TestDataViewBinding testDataViewBinding;
@@ -19,15 +20,8 @@ public class TesDataBindPresenter extends AacDataBindAPresenter<TestDataBindActi
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate");
-           dataViewModel = getApplicationViewModel(DataBindViewModel.class);
-          testDataViewBinding=getDataBind();
+        dataViewModel = getApplicationViewModel(DataBindViewModel.class);
+        testDataViewBinding=getDataBind();
         dataViewModel.getBindData(testDataViewBinding);
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-
 }

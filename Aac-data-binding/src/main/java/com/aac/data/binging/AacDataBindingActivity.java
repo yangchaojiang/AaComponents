@@ -6,6 +6,8 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.View;
 
 import com.aac.expansion.ener.ViewGetDataListener;
 import com.aac.module.pres.RequiresPresenter;
@@ -19,16 +21,13 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  */
 
 @RequiresPresenter(AacDataBindAPresenter.class)
-public abstract class AacDataBindingActivity<P extends AacDataBindAPresenter> extends AacActivity<P> implements ViewGetDataListener<Object> {
+public  abstract class AacDataBindingActivity<P extends AacDataBindAPresenter> extends AacActivity<P> implements ViewGetDataListener{
     private LoadViewHelper helper;
     private ViewDataBinding s;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentLayout());
-        s = DataBindingUtil.setContentView(this, getContentLayout());
-
+        s = DataBindingUtil.setContentView(this, getContentLayoutId());
     }
 
     /***
@@ -46,22 +45,51 @@ public abstract class AacDataBindingActivity<P extends AacDataBindAPresenter> ex
             helper.onDestroy();
         }
     }
+
     @Override
-    public void setData(@NonNull Object data) {
+    public void setError(Throwable e) {
+
     }
 
-        /***
-         *父类调用方法，用于切换
-         * **/
-    void setBaseError(Throwable e) {
-        setError(e);
+    @Override
+    public void showLoadView() {
+        if (helper != null) {
+            helper.showLoading();
+        }
+    }
+
+    @Override
+    public void showErrorView() {
         if (helper != null) {
             helper.showError();
         }
     }
 
     @Override
-    public LoadViewHelper getLoadViewHelper() {
+    public void showContentView() {
+        if (helper != null) {
+            helper.showContent();
+        }
+    }
+
+    @Override
+    public void initLoadHelper(@NonNull View view) {
+        helper=new LoadViewHelper(view);
+        showLoadView();
+    }
+
+    /***
+         *父类调用方法，用于切换
+         * **/
+    void setBaseError(Throwable e) {
+        if (helper != null) {
+            helper.showError();
+        }
+        setError(e);
+    }
+
+    @Override
+    public LoadViewHelper getViewLoadHelper() {
         return helper;
     }
 

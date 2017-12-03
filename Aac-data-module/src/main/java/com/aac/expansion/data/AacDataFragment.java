@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
 import com.aac.expansion.ener.ViewGetDataListener;
 import com.aac.module.ui.AacFragment;
 import com.helper.loadviewhelper.load.LoadViewHelper;
@@ -17,19 +16,10 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  * Deprecated:  Fragment 数据view
  */
 
-public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P>  implements ViewGetDataListener<M> {
+public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P> implements ViewGetDataListener {
     private LoadViewHelper helper;
-    /**
-     * 视图是否已经初初始化
-     */
     protected boolean isInit = false;
     protected boolean isLoad = false;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getContentLayout(), container, false);
-    }
 
     @CallSuper
     @Override
@@ -37,7 +27,9 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
         super.onViewCreated(view, savedInstanceState);
         isInit = true;
         //初始化的时候去加载数据
-        if(setOpenLazyLoad())isCanLoadData();
+        if (setOpenLazyLoad()) {
+            isCanLoadData();
+        }
     }
 
     @CallSuper
@@ -58,9 +50,10 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (setOpenLazyLoad()) isCanLoadData();
+        if (setOpenLazyLoad()) {
+            isCanLoadData();
+        }
     }
-
 
     /**
      * 是否可以加载数据
@@ -81,53 +74,72 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
             }
         }
     }
-    /**
-     * 获取设置的布局
-     *
-     * @return View
-     */
-    protected View getContentView() {
-        return getView();
-    }
+
+
     /**
      * 开启懒加载
      *
-     * @return  setOpenLazyLoad true  开启 false
+     * @return setOpenLazyLoad true  开启 false
      **/
-    protected    boolean  setOpenLazyLoad(){
+    protected boolean setOpenLazyLoad() {
         return false;
     }
+
     /***
      * 父类调用方法，用于切换
      **/
     void setBaseData(@NonNull M data) {
+        showContentView();
         setData(data);
-        if (helper != null) {
-            helper.showContent();
-        }
     }
+
     /***
      * 父类调用方法，用于切换
      **/
     void setBaseError(Throwable e) {
+        showErrorView();
         setError(e);
+    }
+
+    @Override
+    public LoadViewHelper getViewLoadHelper() {
+        return helper;
+    }
+
+    @Override
+    public void initLoadHelper(@NonNull View view) {
+        helper = new LoadViewHelper(view);
+        helper.showLoading();
+        helper.setListener(() -> {
+            getViewLoadHelper().showLoading();
+            getPresenter().retryData();
+        });
+    }
+
+    @Override
+    public void showErrorView() {
         if (helper != null) {
             helper.showError();
         }
     }
+
     @Override
-    public LoadViewHelper getLoadViewHelper() {
-        return helper;
+    public void showContentView() {
+        if (helper != null) {
+            helper.showContent();
+        }
     }
+
+    @Override
+    public void showLoadView() {
+        if (helper != null) {
+            helper.showLoading();
+        }
+    }
+
     /***
-     * 是否加载中布局
-     *
-     * @param contentView 内容布局
-     **/
-    public void showLoading(View contentView) {
-        helper = new LoadViewHelper(contentView);
-        helper.showLoading();
-    }
-
-
+     * 数据返回
+     * @param data data
+     * **/
+    public abstract void setData(@NonNull M data);
 }

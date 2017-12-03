@@ -34,11 +34,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile project(':AacModule')
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.24'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     compile "com.android.support:recyclerview-v7:${libSversion}"
     compile 'com.ycjiang:loadviewhelper:1.1.0'
-
+    compile 'com.ycjiang:center-toolbar:1.0.0'
+    compile project(':AacModule')
 }
 
 
@@ -49,7 +49,7 @@ publish {
     repoName="ycjiang"
     groupId = 'com.ycjiang'
     artifactId = 'AaDataModule'
-    publishVersion = '1.0.7'
+    publishVersion =  project.ext.publishVersion
     desc = 'Based on google Android Architecture Components package to achieve MVP rapid development framework for data management'
     website = 'https://github.com/yangchaojiang/AaComponents'
 }

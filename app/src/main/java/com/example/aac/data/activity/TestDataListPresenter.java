@@ -1,5 +1,6 @@
 package com.example.aac.data.activity;
 
+
 import com.aac.expansion.list.AacListPresenter;
 import com.example.aac.model.TestDataViewModel;
 
@@ -11,12 +12,12 @@ import com.example.aac.model.TestDataViewModel;
 
 public class TestDataListPresenter extends AacListPresenter<TestDataListActivity, String> {
     private TestDataViewModel viewModel;
-    @Override
-    protected void onCreate() {
-        super.onCreate();
-        viewModel = getViewModel(TestDataViewModel.class);
 
+    @Override
+    public void onCreate() {
+        viewModel = getViewModel(TestDataViewModel.class);
     }
+
     /***
      * 没有进入页面没有开启刷新需要说手动调用
      * **/

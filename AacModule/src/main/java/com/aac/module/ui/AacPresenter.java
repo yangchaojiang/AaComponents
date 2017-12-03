@@ -14,7 +14,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 /**
- * Created by yangc on 2017/8/13.
+ * author yangc
+ * date 2017/8/13
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:  业务处理控制类
  *
@@ -31,11 +32,9 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
 
     }
 
-
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     protected void onStart() {
     }
-
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     protected void onResume() {
@@ -79,6 +78,7 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
      * 单例获取viewModel方式类型实例
      *
      * @param modelClass modelClass类型
+     *@param  <ViewModelType>       ViewModelType
      * @return ViewModelType
      **/
     public <ViewModelType extends ViewModel> ViewModelType getInstanceViewModel(Class<ViewModelType> modelClass) {
@@ -89,6 +89,25 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
      * 获取数据viewModel方式类型实例
      *
      * @param modelClass modelClass类型
+     *@param  <ViewModelType>       ViewModelType
+     * @return ViewModelType
+     **/
+    public <ViewModelType extends ViewModel> ViewModelType getViewActivityModel(Class<ViewModelType> modelClass) {
+
+        if (view instanceof Fragment) {
+            return ViewModelProviders.of(((Fragment) view).getActivity()).get(modelClass);
+        } else if (view instanceof FragmentActivity) {
+            return ViewModelProviders.of((FragmentActivity) view).get(modelClass);
+        } else {
+            return getInstanceViewModel(modelClass);
+        }
+    }
+
+    /***
+     * 获取数据viewModel方式类型实例
+     *
+     * @param modelClass modelClass类型
+     *@param  <ViewModelType>       ViewModelType
      * @return ViewModelType
      **/
     public <ViewModelType extends ViewModel> ViewModelType getViewModel(Class<ViewModelType> modelClass) {
@@ -106,6 +125,7 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
      * 获取数据viewModel方式类型实例
      *
      * @param modelClass modelClass类型
+     *@param  <ViewModelType>       ViewModelType
      * @return ViewModelType
      **/
     public <ViewModelType extends ViewModel> ViewModelType getApplicationViewModel(Class<ViewModelType> modelClass) {
@@ -129,9 +149,8 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
         return lifecycle.getCurrentState().isAtLeast(state);
     }
 
-    void create(@NonNull ActivityType view, @NonNull Lifecycle lifecycleRegistry) {
+    void create(@NonNull ActivityType view) {
         this.view = view;
-        this.lifecycle = lifecycleRegistry;
     }
 
 }

@@ -16,7 +16,6 @@ public class TestDataFragmentPresenter extends AacDataFPresenter<TestDataFragmen
     public static final String TAG = "TestFragmentPresenter";
     private TestDataViewModel viewModel;
 
-
     @Override
     protected void onCreateView() {
         super.onCreateView();
@@ -27,7 +26,13 @@ public class TestDataFragmentPresenter extends AacDataFPresenter<TestDataFragmen
 
     @Override
     protected void lazyLoad() {
-       viewModel.getData().observe(getView(),getDataSubscriber());
         Log.d(TAG,"lazyLoad");
+       viewModel.getData().observe(getView(),getDataSubscriber());
+
+    }
+
+    @Override
+    public void retryData() {
+        lazyLoad();
     }
 }

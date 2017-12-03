@@ -34,7 +34,7 @@ public class TestDataBindListActivity extends AacListActivity<TestDataBindListPr
         return android.R.layout.simple_list_item_2;
     }
     @Override
-    public int getContentLayout() {
+    public int getContentLayoutId() {
         return R.layout.test_data_list_actvity;
     }
     @Override
