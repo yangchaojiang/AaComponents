@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.helper.loadviewhelper.load.LoadViewHelper;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -32,6 +33,7 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
     protected SwipeRefreshLayout swipeRefresh;
     private int daraPage = 1;
     private LoadViewHelper helper;
+    private AacBaseQuickAdapter adapter;
     /**
      * 视图是否已经初初始化
      */
@@ -44,15 +46,16 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
         super.onViewCreated(view, savedInstanceState);
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
         recyclerView = view.findViewById(R.id.recyclerView);
+        isInit = true;
         if (setGridSpanCount() <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), setGridSpanCount()));
         }
         swipeRefresh.setOnRefreshListener(this);
+        adapter = new AacBaseQuickAdapter(this);
         adapter.bindToRecyclerView(recyclerView);
         initLoadHelper(swipeRefresh);
-        isInit = true;
         //初始化的时候去加载数据*
         if (setOpenLazyLoad()) {
             isCanLoadData();
@@ -220,7 +223,7 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
      * 获取数据适配器实例
      **/
     @Override
-    public BaseQuickAdapter getAdapter() {
+    public BaseQuickAdapter<M,BaseViewHolder> getAdapter() {
         return adapter;
     }
 
@@ -256,12 +259,21 @@ public abstract class AacListFragment<P extends AacListFragmentPresenter, M> ext
     /***
      * 数据式适配器
      ****/
-    private BaseQuickAdapter adapter = new BaseQuickAdapter<M, BaseViewHolder>(getItemLayout()) {
+    private class AacBaseQuickAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
+        private WeakReference<AacListFragment> weakReference;
+        private AacBaseQuickAdapter(AacListFragment aacListFragment) {
+            super(getItemLayout());
+            weakReference=new WeakReference<>(aacListFragment);
+
+        }
+
         @Override
         protected void convert(BaseViewHolder helper, M item) {
+            if (weakReference.get()==null) return;
             convertViewHolder(helper, item);
         }
-    };
+    }
+
 
 }
 

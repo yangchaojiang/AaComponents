@@ -20,6 +20,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.helper.loadviewhelper.load.LoadViewHelper;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
     private RecyclerView recyclerView;
     protected SwipeRefreshLayout swipeRefresh;
+    private AacBaseQuickAdapter adapter;
     private int daraPage = 1;
     private LoadViewHelper helper;
 
@@ -48,6 +50,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
             recyclerView.setLayoutManager(new GridLayoutManager(this, setGridSpanCount()));
         }
         swipeRefresh.setOnRefreshListener(this);
+        adapter = new AacBaseQuickAdapter(this);
         adapter.bindToRecyclerView(recyclerView);
         initLoadHelper(swipeRefresh);
     }
@@ -171,7 +174,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
      * 获取数据适配器实例
      **/
     @Override
-    public BaseQuickAdapter getAdapter() {
+    public BaseQuickAdapter<M,BaseViewHolder> getAdapter() {
         return adapter;
     }
 
@@ -225,11 +228,18 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
     /***
      * 数据式适配器
      ****/
-    private BaseQuickAdapter adapter = new BaseQuickAdapter<M, BaseViewHolder>(getItemLayout()) {
+    private   class AacBaseQuickAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
+        private WeakReference<AacListActivity> weakReference;
+
+        private AacBaseQuickAdapter(AacListActivity aacListFragment) {
+            super(getItemLayout());
+            weakReference = new WeakReference<>(aacListFragment);
+        }
+
         @Override
         protected void convert(BaseViewHolder helper, M item) {
-            convertViewHolder(helper, item);
+            if (weakReference.get() == null) return;
+             convertViewHolder(helper, item);
         }
-    };
-
+    }
 }

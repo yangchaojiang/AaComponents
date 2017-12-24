@@ -21,7 +21,6 @@ public abstract class AacListPresenter<V extends AacListActivity, M> extends Aac
             getView().setError(new Throwable(new NullPointerException()));
         }
     };
-
     /**
      * 订阅
      * @return Observer
@@ -37,12 +36,11 @@ public abstract class AacListPresenter<V extends AacListActivity, M> extends Aac
     public void postValue(@NonNull List<M> data) {
         getView().setData(data);
     }
-
     /***
      * 加载分页数据
      *
      * @param pager 分页 等于1 刷新
      ***/
-    public abstract void setLoadData(int pager);
+    public   void setLoadData(int pager){};
 
 }

@@ -25,6 +25,14 @@ public class ActivityCallback extends ActivityLifecycleCallbacksWrapper {
         res.updateConfiguration(config, res.getDisplayMetrics());
     }
 
+    @Override
+    public void onActivityResumed(Activity activity) {
+        super.onActivityResumed(activity);
+    }
+    @Override
+    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+        super.onActivitySaveInstanceState(activity, outState);
+    }
 
     @Override
     public void onActivityDestroyed(Activity activity) {

@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/Aac-kotlin-data-module/Aac-kotlin-data-module.iml" filepath="$PROJECT_DIR$/Aac-kotlin-data-module/Aac-kotlin-data-module.iml" />
       <module fileurl="file://$PROJECT_DIR$/AacModule/AacModule.iml" filepath="$PROJECT_DIR$/AacModule/AacModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kotlinTest/kotlinTest.iml" filepath="$PROJECT_DIR$/kotlinTest/kotlinTest.iml" />
     </modules>
   </component>
 </project>

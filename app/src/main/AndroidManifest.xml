@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aac">
 
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".java.MainActivity"
             android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,19 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".data.activity.TestDataActivity" />
-        <activity
-            android:name=".data.activity.TestDataListActivity"
-              />
-        <activity
-            android:name=".data.fragment.list.TestDataFragmentActivity"
-             />
-        <activity
-            android:name=".data.fragment.data.Test2FragmentActivity"
-            />
-        <activity android:name=".data.fragment.TestFragmentActivity" />
+        <activity android:name=".java.data.activity.TestDataActivity" />
+        <activity android:name=".java.data.activity.TestDataListActivity" />
+        <activity android:name=".java.data.fragment.list.TestDataFragmentActivity" />
+        <activity android:name=".java.data.fragment.data.Test2FragmentActivity" />
+        <activity android:name=".java.data.fragment.TestFragmentActivity" />
+        <activity android:name=".kotlin.MainActivity" />
+        <activity android:name=".kotlin.activity.TestListActivity" />
+        <activity android:name=".kotlin.fragment.defaults.TestDataFragmentActivity" />
 
-        <activity android:name=".data.bing.TestDataBindActivity" />
+
     </application>
 
 </manifest>

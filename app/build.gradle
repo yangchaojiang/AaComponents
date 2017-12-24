@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion project.ext.buildToolsVersion
@@ -39,5 +41,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.coolerfall:android-app-daemon:1.2.0'
     compile "android.arch.lifecycle:reactivestreams:1.0.0"
-
+    compile 'com.lzy.net:okgo:3.0.4'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

@@ -70,7 +70,6 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
         helper = new LoadViewHelper(view);
         helper.showLoading();
         helper.setListener(() -> {
-            getViewLoadHelper().showLoading();
             getPresenter().retryData();
         });
     }

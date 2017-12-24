@@ -44,7 +44,7 @@ public abstract class AacListFragmentPresenter<V extends AacListFragment, M> ext
      *
      * @param pager  等于1刷新
      ***/
-    public abstract void setLoadData(int pager);
+    public   void setLoadData(int pager){};
     /**
      * 当视图初始化并且对用户可见的时候去真正的加载数据
      *

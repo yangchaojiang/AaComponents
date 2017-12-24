@@ -36,7 +36,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     compile "com.android.support:recyclerview-v7:${libSversion}"
-    compile 'com.ycjiang:loadviewhelper:1.1.0'
+    compile 'com.ycjiang:loadviewhelper:1.1.1'
     compile 'com.ycjiang:center-toolbar:1.0.0'
     compile project(':AacModule')
 }

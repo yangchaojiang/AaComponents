@@ -53,10 +53,6 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
         view = null;
         lifecycle = null;
     }
-
-    /***
-     * 属于fragment 创建View 方法,该方法才用执行
-     */
     protected void onCreateView() {
 
     }
