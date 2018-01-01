@@ -14,12 +14,6 @@ package com.aac.module.ui;
 public abstract class AacFragmentPresenter<FragmentType extends AacFragment> extends AacPresenter<FragmentType> {
 
 
-    public void onDestroyView() {
-
-    }
-
-    public void onViewCreated() {
-    }
 
 
 }

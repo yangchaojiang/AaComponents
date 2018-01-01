@@ -4,6 +4,7 @@ package com.aac.expansion.data;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 
+import com.aac.expansion.ener.PostDataListener;
 import com.aac.module.ui.AacPresenter;
 
 /**
@@ -12,22 +13,23 @@ import com.aac.module.ui.AacPresenter;
  * Deprecated:  数据业务
  */
 
-public abstract class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresenter<V> {
+public abstract class AacDataAPresenter<V extends AacDataActivity, M> extends AacPresenter<V> implements PostDataListener<M> {
     private Observer<M> observeForever = m -> {
         if (m != null) {
-            getView().setBaseData(m);
+            postData(m);
         } else {
-            getView().setError(new Throwable(new NullPointerException()));
+            postError(new Throwable(new NullPointerException()));
         }
     };
 
-    /***
-     * 手动发布数据
-     * @param  data 数据
-     *
-     **/
-    public void postData(@NonNull M data) {
-        getView().setBaseData(data);
+    @Override
+    public void postData(@NonNull M m) {
+        getView().setBaseData(m);
+    }
+
+    @Override
+    public void postError(Throwable e) {
+        getView().setError(new Throwable(new NullPointerException()));
     }
 
     /**
@@ -39,9 +41,16 @@ public abstract class AacDataAPresenter<V extends AacDataActivity, M> extends Aa
         return observeForever;
     }
 
-    /**
-     * 点击重试加载
-     **/
-    public abstract void retryData();
+    @Override
+    public void retryData() {
 
+    }
+
+    /***
+     * 列表加载分页数据
+     *
+     * @param pager 分页 等于1 刷新
+     ***/
+    public void setLoadListData(int pager) {
+    }
 }

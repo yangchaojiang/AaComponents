@@ -18,18 +18,12 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
 
 public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P> implements ViewGetDataListener {
     private LoadViewHelper helper;
-    protected boolean isInit = false;
-    protected boolean isLoad = false;
 
     @CallSuper
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        isInit = true;
-        //初始化的时候去加载数据
-        if (setOpenLazyLoad()) {
-            isCanLoadData();
-        }
+
     }
 
     @CallSuper
@@ -39,8 +33,19 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
         if (helper != null) {
             helper.onDestroy();
         }
-        isInit = false;
-        isLoad = false;
+    }
+
+    /***
+     * 父类调用方法，用于切换
+     **/
+    void setBaseData(@NonNull M data) {
+        showContentView();
+        setData(data);
+    }
+
+    @Override
+    public void setError(Throwable e) {
+        showErrorView();
     }
 
     /**
@@ -61,20 +66,21 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
      * 1.视图已经初始化
      * 2.视图对用户可见
      */
-    private void isCanLoadData() {
+    protected void isCanLoadData() {
         if (!isInit) {
             return;
         }
         if (getUserVisibleHint()) {
-            getPresenter().lazyLoad();
-            isLoad = true;
+            if (!isLoad) {
+                isLoad = true;
+                getPresenter().lazyLoad();
+            }
         } else {
             if (isLoad) {
                 getPresenter().stopLoad();
             }
         }
     }
-
 
     /**
      * 开启懒加载
@@ -83,22 +89,6 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
      **/
     protected boolean setOpenLazyLoad() {
         return false;
-    }
-
-    /***
-     * 父类调用方法，用于切换
-     **/
-    void setBaseData(@NonNull M data) {
-        showContentView();
-        setData(data);
-    }
-
-    /***
-     * 父类调用方法，用于切换
-     **/
-    void setBaseError(Throwable e) {
-        showErrorView();
-        setError(e);
     }
 
     @Override
@@ -141,5 +131,5 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
      * 数据返回
      * @param data data
      * **/
-    public abstract void setData(@NonNull M data);
+    protected abstract void setData(@NonNull M data);
 }

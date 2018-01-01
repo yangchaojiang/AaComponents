@@ -9,17 +9,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
+import com.aac.expansion.data.AacDataActivity;
 import com.aac.expansion.ener.ViewGetListener;
-import com.aac.module.pres.RequiresPresenter;
-import com.aac.module.ui.AacActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.helper.loadviewhelper.load.LoadViewHelper;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -29,14 +25,12 @@ import java.util.List;
  * Deprecated: 数据父类
  */
 
-@RequiresPresenter(AacDataAPresenter.class)
-public abstract class AacListActivity<P extends AacListPresenter, M> extends AacActivity<P>
+public abstract class AacListActivity<P extends AacDataAPresenter, M> extends AacDataActivity<P,List<M>>
         implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
-    private RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     protected SwipeRefreshLayout swipeRefresh;
     private AacBaseQuickAdapter adapter;
     private int daraPage = 1;
-    private LoadViewHelper helper;
 
     @CallSuper
     @Override
@@ -53,6 +47,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         adapter = new AacBaseQuickAdapter(this);
         adapter.bindToRecyclerView(recyclerView);
         initLoadHelper(swipeRefresh);
+        adapter.setEmptyView(getViewLoadHelper().getEmptyLayoutId());
     }
 
     @CallSuper
@@ -67,41 +62,35 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
             swipeRefresh.setRefreshing(false);
             swipeRefresh.setOnRefreshListener(null);
         }
-        if (helper != null) {
-            helper.onDestroy();
-            helper = null;
-        }
-    }
 
+    }
 
     @Override
     public void onRefresh() {
         daraPage = 1;
-        getPresenter().setLoadData(daraPage);
+        getPresenter().setLoadListData(daraPage);
     }
 
     @Override
     public void onLoadMoreRequested() {
         daraPage += 1;
-        getPresenter().setLoadData(daraPage);
+        getPresenter().setLoadListData(daraPage);
     }
 
     /***
      * 设置数据
      * @param data data
      * **/
+    @Override
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
             if (!swipeRefresh.isRefreshing()) {
-                helper.showContent();
+                getViewLoadHelper().showContent();
             } else {
                 setRefreshing(false);
             }
             adapter.getData().clear();
             adapter.notifyDataSetChanged();
-            if (data.isEmpty()) {
-                helper.showEmpty();
-            }
         } else {
             if (data.isEmpty()) {
                 adapter.loadMoreEnd();
@@ -112,55 +101,28 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         adapter.addData(data);
 
     }
-
+    /***
+     * 错误
+     * @param  e 错误
+     **/
+    @Override
+    public void setError(Throwable e) {
+        if (daraPage < 2) {
+            showErrorView();
+        } else {
+            adapter.loadMoreFail();
+        }
+    }
     @Override
     public int getContentLayoutId() {
         return R.layout.aac_recycle_view;
     }
 
-    @Override
-    public void setError(Throwable e) {
-        if (daraPage < 2) {
-            helper.showError();
-        } else {
-            adapter.loadMoreFail();
-        }
-    }
 
     @Override
     public int getCurPage() {
         return daraPage;
     }
-
-    @Override
-    public void initLoadHelper(@NonNull View view) {
-        helper = new LoadViewHelper(view);
-    }
-
-    /***
-     * 显示数据加载view
-     **/
-    @Override
-    public void showLoadView() {
-        if (helper != null) {
-            helper.showLoading();
-        }
-    }
-
-    @Override
-    public void showErrorView() {
-        if (helper != null) {
-            helper.showError();
-        }
-    }
-
-    @Override
-    public void showContentView() {
-        if (helper != null) {
-            helper.showContent();
-        }
-    }
-
 
     /**
      * 获取RecyclerView
@@ -178,13 +140,6 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
         return adapter;
     }
 
-    /***
-     * 获取加载管理类
-     */
-    @Override
-    public LoadViewHelper getViewLoadHelper() {
-        return helper;
-    }
 
     /***
      * 进入页面开启是否下拉刷新
@@ -192,9 +147,7 @@ public abstract class AacListActivity<P extends AacListPresenter, M> extends Aac
      * @param setRefreshing true 开始刷新 false 停滞
      **/
     public void setRefreshing(final boolean setRefreshing) {
-        if (helper != null) {
-            helper.showContent();
-        }
+           showContentView();
         swipeRefresh.postDelayed(() -> {
             if (swipeRefresh == null) return;
             swipeRefresh.setRefreshing(setRefreshing);

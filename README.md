@@ -6,9 +6,9 @@ AaComponents 是一套基于MVP模式的快速开发框架。定义了一套开�
 完成APP开发过程中大量繁琐工作。
 
 ##依赖
-  * 1 compile 'com.ycjiang:AaDataModule:2.0.3'
-  * 2 compile 'com.ycjiang:AacModule:2.0.3'
-
+  * 1 compile 'com.ycjiang:AacDataModule:2.1.5'
+  * 2 compile 'com.ycjiang:AacModule:2.1.5'
+  * 3  compile 'com.ycjiang:AacRxDataModule:2.1.5'
     >>     注意 引用 AaDataModule 默认引用 AacModule 包， 不需要在引用在AaDataModule
 
 ```

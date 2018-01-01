@@ -4,9 +4,7 @@ package com.aac.expansion.data;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.view.View;
-
 import com.aac.expansion.ener.ViewGetDataListener;
-import com.aac.module.pres.RequiresPresenter;
 import com.aac.module.ui.AacActivity;
 import com.helper.loadviewhelper.load.LoadViewHelper;
 
@@ -17,7 +15,6 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
  * Deprecated: Activity数据父类
  */
 
-@RequiresPresenter(AacDataAPresenter.class)
 public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends AacActivity<P> implements ViewGetDataListener {
     private LoadViewHelper helper;
 
@@ -33,11 +30,11 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
     /***
      *父类调用方法，用于切换
      * **/
-    void setBaseData(@NonNull M data) {
-        if (helper != null) {
-            helper.showContent();
-        }
+     void setBaseData(@NonNull M data) {
         setData(data);
+         if (helper != null) {
+             helper.showContent();
+         }
     }
 
 
@@ -45,12 +42,11 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
      *父类调用方法，用于切换
      * **/
     @Override
-    public void setError(Throwable e) {
+     public void setError(Throwable e) {
         if (helper != null) {
             helper.showError();
         }
     }
-
 
     @Override
     public LoadViewHelper getViewLoadHelper() {
@@ -64,14 +60,11 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
         }
     }
 
-
     @Override
     public void initLoadHelper(@NonNull View view) {
         helper = new LoadViewHelper(view);
         helper.showLoading();
-        helper.setListener(() -> {
-            getPresenter().retryData();
-        });
+        helper.setListener(() -> getPresenter().retryData());
     }
 
     @Override
@@ -87,7 +80,6 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
             helper.showContent();
         }
     }
-
     /***
      * 数据返回
      * @param data data

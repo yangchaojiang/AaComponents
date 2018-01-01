@@ -3,6 +3,7 @@ package com.example.aac.java.data.activity;
 import android.util.Log;
 
 import com.aac.expansion.data.AacDataAPresenter;
+import com.aac.module.rx2.presenter.data.AacRxDataAPresenter;
 import com.example.aac.java.data.activity.bean.UserBean;
 import com.example.aac.java.model.TestDataViewModel;
 
@@ -13,12 +14,13 @@ import com.example.aac.java.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TesDataPresenter extends AacDataAPresenter<TestDataActivity, String> {
+public class TesDataPresenter extends AacRxDataAPresenter<TestDataActivity, String> {
     public static final String TAG = TesDataPresenter.class.getName();
     private TestDataViewModel dataViewModel;
 
     @Override
     public void onCreate() {
+        super.onCreate();
         Log.d(TAG, "onCreate");
         dataViewModel = getApplicationViewModel(TestDataViewModel.class);
         getData();

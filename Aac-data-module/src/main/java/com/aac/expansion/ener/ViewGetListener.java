@@ -30,7 +30,7 @@ public interface ViewGetListener<M> extends ViewGetDataListener{
      * 获取数据适配器实例
      * @return BaseQuickAdapter
      **/
-    BaseQuickAdapter getAdapter();
+    BaseQuickAdapter<M,BaseViewHolder> getAdapter();
 
     /***
      * 设置网格中的列数
@@ -45,8 +45,6 @@ public interface ViewGetListener<M> extends ViewGetDataListener{
      **/
     @LayoutRes
     int getItemLayout();
-
-
 
     /****
      * BaseViewHolder 实现item 布局内容

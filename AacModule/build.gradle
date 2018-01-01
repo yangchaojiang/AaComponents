@@ -6,8 +6,8 @@ android {
     defaultConfig {
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode  project.ext.versionCode
+        versionName  project.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -39,9 +39,9 @@ dependencies {
     compile "com.android.support:appcompat-v7:${libSversion}"
 }
 
-apply plugin: 'com.novoda.bintray-release'
-//上传到jcenter
-
+ apply plugin: 'com.novoda.bintray-release'
+////上传到jcenter
+//
 publish {
     repoName="ycjiang"//仓库名
     userOrg = 'ycjiang'

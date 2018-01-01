@@ -1,7 +1,7 @@
 package com.example.aac.java.data.activity;
 
 
-import com.aac.expansion.list.AacListPresenter;
+import com.aac.module.rx2.presenter.list.AacRxListAPresenter;
 import com.example.aac.java.model.TestDataViewModel;
 
 /**
@@ -10,11 +10,11 @@ import com.example.aac.java.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestDataListPresenter extends AacListPresenter<TestDataListActivity, String> {
+public class TestDataListPresenter extends AacRxListAPresenter<TestDataListActivity, String> {
     private TestDataViewModel viewModel;
-
     @Override
     public void onCreate() {
+        super.onCreate();
         viewModel = getViewModel(TestDataViewModel.class);
     }
 
@@ -22,7 +22,7 @@ public class TestDataListPresenter extends AacListPresenter<TestDataListActivity
      * 没有进入页面没有开启刷新需要说手动调用
      * **/
     @Override
-    public void setLoadData(int pager) {
+    public void setLoadListData(int pager) {
         viewModel.getListData(pager).observe(getView(), getDataSubscriber());
       //  viewModel.getListData(getView(),"id",pager).observe(getView(),getDataSubscriber());
     }

@@ -57,6 +57,12 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
 
     }
 
+    public void onDestroyView() {
+
+    }
+
+    public void onViewCreated() {
+    }
     protected void onResult(int requestCode, int resultCode, Intent data) {
 
     }
@@ -148,5 +154,6 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
     void create(@NonNull ActivityType view) {
         this.view = view;
     }
+
 
 }

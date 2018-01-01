@@ -4,34 +4,41 @@ package com.aac.expansion.data;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 
+import com.aac.expansion.ener.PostDataListener;
 import com.aac.module.ui.AacFragmentPresenter;
 
 /**
- * @author yangc
- *         date 2017/8/14
- *         E-Mail:yangchaojiang@outlook.com
- *         Deprecated:  Fragment数据业务
+ * author yangc
+ * date 2017/8/14
+ * E-Mail:yangchaojiang@outlook.com
+ * Deprecated:  Fragment数据业务
  */
 
-public abstract class AacDataFPresenter<V extends AacDataFragment, M> extends AacFragmentPresenter<V> {
-
+public  abstract class AacDataFPresenter<V extends AacDataFragment, M> extends AacFragmentPresenter<V> implements PostDataListener<M> {
 
     private Observer<M> observeForever = m -> {
         if (m != null) {
-            getView().setBaseData(m);
+            postData(m);
         } else {
-            getView().setBaseError(new Throwable(new NullPointerException()));
+            postError(new Throwable(new NullPointerException()));
         }
     };
 
-    /***
-     * 可以子线程数据ui线程手动发布数据
-     * @param data 数据
-     **/
-    public void postData(@NonNull M data) {
-        getView().setBaseData(data);
+    @Override
+    public void postData(@NonNull M m) {
+            getView().setBaseData(m);
     }
 
+    @Override
+    public void postError(Throwable e) {
+        getView().setError(e);
+
+    }
+
+    @Override
+    public void retryData() {
+
+    }
     /**
      * 返回订阅数据
      *
@@ -51,9 +58,11 @@ public abstract class AacDataFPresenter<V extends AacDataFragment, M> extends Aa
      */
     protected void stopLoad() {
     }
+    /***
+     * 列表加载分页数据
+     *
+     * @param pager 分页 等于1 刷新
+     ***/
+    public   void setLoadData(int pager){}
 
-    /**
-     * 点击重试加载
-     **/
-    public abstract void retryData();
 }

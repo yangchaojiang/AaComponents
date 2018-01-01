@@ -49,8 +49,8 @@ abstract class JsonCallbcakKotlin<T> : AbsCallback<T> {
         val s = JsonManager.parseJsonObject(body.string())
         return if (s.getBoolean("success")!!) {
             when {
-                clazz != null -> JsonManager.jsonToBean(s[key].toString(), clazz)
-                type != null -> JsonManager.jsonToBean(s[key].toString(), type)
+                clazz != null -> JsonManager.jsonToBean(s[key].toString(), clazz!!)
+                type != null -> JsonManager.jsonToBean(s[key].toString(), type!!)
                 else -> JsonManager.jsonToBean(body.bytes())
             }
         } else {

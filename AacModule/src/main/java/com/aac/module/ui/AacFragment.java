@@ -24,8 +24,9 @@ import com.aac.module.utils.ContentLayoutListener;
  */
 
 public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragment implements ContentLayoutListener {
-    private   LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
+    private LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private P t = PresenterBuilder.fromViewClass(this);
+
     @CallSuper
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragme
         lifecycleRegistry.addObserver(t);
         lifecycleRegistry.markState(Lifecycle.State.CREATED);
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,17 +51,19 @@ public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragme
         super.onViewCreated(view, savedInstanceState);
         t.onViewCreated();
     }
+
     @CallSuper
     @Override
     public void onStart() {
         super.onStart();
         lifecycleRegistry.markState(Lifecycle.State.STARTED);
     }
+
     @CallSuper
     @Override
     public void onResume() {
         super.onResume();
-       lifecycleRegistry.markState(Lifecycle.State.RESUMED);
+        lifecycleRegistry.markState(Lifecycle.State.RESUMED);
     }
 
     @CallSuper
@@ -78,6 +82,8 @@ public abstract class AacFragment<P extends AacFragmentPresenter> extends Fragme
         lifecycleRegistry = null;
         t = null;
     }
+
+
 
     @NonNull
     @Override
