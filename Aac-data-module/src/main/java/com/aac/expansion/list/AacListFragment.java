@@ -5,17 +5,16 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.aac.expansion.R;
-import com.aac.expansion.data.AacDataAPresenter;
 import com.aac.expansion.data.AacDataFPresenter;
 import com.aac.expansion.data.AacDataFragment;
 import com.aac.expansion.ener.ViewGetListener;
-import com.aac.module.pres.RequiresPresenter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -47,13 +46,17 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), setGridSpanCount()));
         }
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         swipeRefresh.setOnRefreshListener(this);
         swipeRefresh.setRefreshing(false);
         adapter = new AacBaseQuickAdapter(this);
         adapter.bindToRecyclerView(recyclerView);
-        initLoadHelper(swipeRefresh);
-        adapter.setEmptyView(getViewLoadHelper().getEmptyLayoutId());
+    }
 
+    @Override
+    public void initLoadHelper(@NonNull View view) {
+        super.initLoadHelper(view);
+        adapter.setEmptyView(getViewLoadHelper().getEmptyLayoutId());
     }
 
     @CallSuper
@@ -77,21 +80,23 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
      * **/
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
-            if (!swipeRefresh.isRefreshing()) {
-                showLoadView();
-            } else {
+            adapter.isUseEmpty(true);
+            if (swipeRefresh.isRefreshing()) {
                 setRefreshing(false);
             }
             adapter.getData().clear();
             adapter.notifyDataSetChanged();
+            adapter.addData(data);
+
         } else {
             if (data.isEmpty()) {
                 adapter.loadMoreEnd();
             } else {
                 adapter.loadMoreComplete();
             }
+            adapter.addData(data);
         }
-        adapter.addData(data);
+
     }
 
     @Override
@@ -101,6 +106,10 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
         } else {
             adapter.loadMoreFail();
         }
+    }
+
+    public void setDaraPage(int daraPage) {
+        this.daraPage = daraPage;
     }
 
     @Override
@@ -145,11 +154,18 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
 
 
     /***
-     * @param refreshing 是否刷新 true   false 则停止
+     * @param setRefreshing 是否刷新 true   false 则停止
      **/
-    public void setRefreshing(boolean refreshing) {
-        swipeRefresh.setRefreshing(refreshing);
+    public void setRefreshing(boolean setRefreshing) {
         showContentView();
+        adapter.isUseEmpty(false);
+        swipeRefresh.postDelayed(() -> {
+            if (swipeRefresh == null) return;
+            swipeRefresh.setRefreshing(setRefreshing);
+            if (setRefreshing) {
+                onRefresh();
+            }
+        }, 200);
     }
 
     /**

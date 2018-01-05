@@ -16,6 +16,7 @@ public class TestDataListPresenter extends AacRxListAPresenter<TestDataListActiv
     public void onCreate() {
         super.onCreate();
         viewModel = getViewModel(TestDataViewModel.class);
+        setLoadListData(1);
     }
 
     /***

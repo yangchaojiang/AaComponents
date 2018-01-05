@@ -30,7 +30,7 @@ public class TestListFragment extends AacListFragment<TestFragmentPresenter, Str
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setStartLoadMore(true);
-        setRefreshing(true);
+       setRefreshing(true);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TestListFragment extends AacListFragment<TestFragmentPresenter, Str
     }
     @Override
     protected boolean setOpenLazyLoad() {
-        return true;
+        return false;
     }
 
 }

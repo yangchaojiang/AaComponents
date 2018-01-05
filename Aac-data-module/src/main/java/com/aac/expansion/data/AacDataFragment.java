@@ -18,13 +18,8 @@ import com.helper.loadviewhelper.load.LoadViewHelper;
 
 public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends AacFragment<P> implements ViewGetDataListener {
     private LoadViewHelper helper;
-
-    @CallSuper
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
+    private boolean isInit = false;
+    private boolean isLoad = false;
 
     @CallSuper
     @Override
@@ -39,8 +34,8 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
      * 父类调用方法，用于切换
      **/
     void setBaseData(@NonNull M data) {
-        showContentView();
         setData(data);
+        showContentView();
     }
 
     @Override
@@ -74,6 +69,8 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
             if (!isLoad) {
                 isLoad = true;
                 getPresenter().lazyLoad();
+            }else {
+                showContentView();
             }
         } else {
             if (isLoad) {
@@ -98,12 +95,14 @@ public abstract class AacDataFragment<P extends AacDataFPresenter, M> extends Aa
 
     @Override
     public void initLoadHelper(@NonNull View view) {
-        helper = new LoadViewHelper(view);
-        helper.showLoading();
-        helper.setListener(() -> {
-            getViewLoadHelper().showLoading();
-            getPresenter().retryData();
-        });
+        if (!isLoad) {
+            helper = new LoadViewHelper(view);
+            helper.showLoading();
+            helper.setListener(() -> {
+                getViewLoadHelper().showLoading();
+                getPresenter().retryData();
+            });
+        }
     }
 
     @Override
