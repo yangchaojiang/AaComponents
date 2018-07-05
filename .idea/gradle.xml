@@ -8,11 +8,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Aac-data-binding" />
             <option value="$PROJECT_DIR$/Aac-data-module" />
+            <option value="$PROJECT_DIR$/Aac-data-module-coroutines" />
+            <option value="$PROJECT_DIR$/Aac-data-module-http" />
             <option value="$PROJECT_DIR$/Aac-data-module-rx2" />
-            <option value="$PROJECT_DIR$/Aac-kotlin-data-module" />
             <option value="$PROJECT_DIR$/AacModule" />
+            <option value="$PROJECT_DIR$/aac-data-http-rx2" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

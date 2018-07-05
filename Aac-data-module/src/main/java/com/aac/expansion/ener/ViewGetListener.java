@@ -19,7 +19,11 @@ public interface ViewGetListener<M> extends ViewGetDataListener{
      * @return int
      ***/
     int getCurPage();
-
+    /**
+     * 获取获取最后一个示例
+     * @return BaseQuickAdapter
+     **/
+     M  getLastItem();
     /**
      * 获取RecyclerView
      * @return RecyclerView
@@ -53,6 +57,7 @@ public interface ViewGetListener<M> extends ViewGetDataListener{
      * @param item   数据
      **/
     void convertViewHolder(BaseViewHolder helper, M item);
+
 
 
 }

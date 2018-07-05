@@ -46,13 +46,14 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(this, setGridSpanCount()));
         }
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+      //  recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         swipeRefresh.setOnRefreshListener(this);
         adapter = new AacBaseQuickAdapter(this);
         adapter.bindToRecyclerView(recyclerView);
         //检查是否满一屏，如果不满足关闭loadMore
-        adapter.disableLoadMoreIfNotFullPage();
         initLoadHelper(swipeRefresh);
+        adapter.disableLoadMoreIfNotFullPage();
+
     }
 
     @CallSuper
@@ -94,7 +95,6 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
     @Override
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
-            adapter.isUseEmpty(true);
             if (swipeRefresh.isRefreshing()) {
                 setRefreshing(false);
             }
@@ -121,6 +121,9 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
     @Override
     public void setError(Throwable e) {
         if (daraPage < 2) {
+            if (swipeRefresh.isRefreshing()) {
+                setRefreshing(false);
+            }
             showErrorView();
         } else {
             adapter.loadMoreFail();
@@ -139,6 +142,15 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
     @Override
     public int getCurPage() {
         return daraPage;
+    }
+
+    @Nullable
+    @Override
+    public M getLastItem() {
+        if (adapter.getData().isEmpty()){
+            return  null;
+        }
+        return adapter.getItem(adapter.getData().size()-1);
     }
 
     /**
@@ -165,7 +177,6 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
      **/
     public void setRefreshing(final boolean setRefreshing) {
         showContentView();
-        adapter.isUseEmpty(false);
         swipeRefresh.postDelayed(() -> {
             if (swipeRefresh == null) return;
             swipeRefresh.setRefreshing(setRefreshing);

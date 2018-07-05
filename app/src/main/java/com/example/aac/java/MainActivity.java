@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.center.toolbar.TitleToolbar;
 import com.example.aac.R;
+import com.example.aac.java.coroutines.CoroutinesActivity;
 import com.example.aac.java.data.activity.TestDataActivity;
 import com.example.aac.java.data.activity.TestDataListActivity;
 import com.example.aac.java.data.fragment.TestFragmentActivity;
@@ -48,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent intent = new Intent(MainActivity.this, TestDataBindActivity.class);
-            ///    startActivity(intent);
+              Intent intent = new Intent(MainActivity.this, CoroutinesActivity.class);
+             startActivity(intent);
             }
         });
     }

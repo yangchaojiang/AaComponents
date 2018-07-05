@@ -21,7 +21,7 @@ public class TestDataListActivity extends AacListActivity<TestDataListPresenter,
         super.onCreate(savedInstanceState);
            setLoadMore(true);
           setRefreshing(true);
-        getSupportActionBar().setTitle("数据");
+          setTitle("测试数据");
     }
    
     @Override

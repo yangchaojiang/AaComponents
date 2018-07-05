@@ -31,10 +31,10 @@ public abstract class AacDataActivity<P extends AacDataAPresenter, M> extends Aa
      *父类调用方法，用于切换
      * **/
      void setBaseData(@NonNull M data) {
-        setData(data);
          if (helper != null) {
              helper.showContent();
          }
+         setData(data);
     }
 
 

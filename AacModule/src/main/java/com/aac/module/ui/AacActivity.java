@@ -1,7 +1,6 @@
 package com.aac.module.ui;
 
 import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import com.aac.module.utils.ContentLayoutListener;
 public abstract class AacActivity<P extends AacPresenter> extends AppCompatActivity implements  ContentLayoutListener {
     private  LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private P t = PresenterBuilder.fromViewClass(this);
-
     @CallSuper
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +92,7 @@ public abstract class AacActivity<P extends AacPresenter> extends AppCompatActiv
             getSupportActionBar().setTitle(title);
         }
     }
+
     /***
      * 得到对应业务处理类
      *

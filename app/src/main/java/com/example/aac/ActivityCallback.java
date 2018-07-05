@@ -19,10 +19,7 @@ public class ActivityCallback extends ActivityLifecycleCallbacksWrapper {
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         super.onActivityCreated(activity, savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(false);
-        Resources res = activity.getResources();
-        Configuration config = new Configuration();
-        config.setToDefaults();
-        res.updateConfiguration(config, res.getDisplayMetrics());
+
     }
 
     @Override

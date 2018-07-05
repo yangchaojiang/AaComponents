@@ -26,11 +26,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile('com.android.support:appcompat-v7:' + libSversion, {
@@ -39,14 +43,14 @@ dependencies {
     compile('com.android.support:support-v4:' + libSversion, {
         exclude group: 'com.android.support', module: 'support-v4'
     })
-    compile project(':Aac-data-binding')
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
     compile 'com.ycjiang:Yutils:1.2.3'
     testCompile 'junit:junit:4.12'
     compile 'com.coolerfall:android-app-daemon:1.2.0'
-    compile 'android.arch.lifecycle:reactivestreams:1.0.0'
+    compile 'android.arch.lifecycle:reactivestreams:1.1.1'
     compile 'com.lzy.net:okgo:3.0.4'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
-   // compile 'com.ycjiang:AacRxDataModule:2.1.5'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // compile 'com.ycjiang:AacRxDataModule:2.1.5'
+    implementation project(':Aac-data-module-http')
+    implementation project(':Aac-data-module-coroutines')
 }

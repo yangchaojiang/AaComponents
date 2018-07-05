@@ -43,7 +43,7 @@ public abstract class AacDataAPresenter<V extends AacDataActivity, M> extends Aa
 
     @Override
     public void retryData() {
-
+        setLoadListData(1);
     }
 
     /***

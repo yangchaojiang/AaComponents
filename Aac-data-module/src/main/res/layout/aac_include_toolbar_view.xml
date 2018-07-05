@@ -7,4 +7,5 @@
     android:background="?colorPrimary"
     app:backIcon="@drawable/ic_chevron_left_black_24dp"
     app:titleTextColor="@android:color/white"
+    app:titleTextSize="22sp"
     app:title_gravity="center" />

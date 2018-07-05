@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aac">
 
@@ -26,8 +26,7 @@
         <activity android:name=".kotlin.MainActivity" />
         <activity android:name=".kotlin.activity.TestListActivity" />
         <activity android:name=".kotlin.fragment.defaults.TestDataFragmentActivity" />
-
-
+        <activity android:name=".java.coroutines.CoroutinesActivity"></activity>
     </application>
 
 </manifest>

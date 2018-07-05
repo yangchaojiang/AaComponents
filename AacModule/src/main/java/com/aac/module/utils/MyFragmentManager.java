@@ -122,6 +122,16 @@ public class MyFragmentManager {
         b.replace(resId,fragmentList.get(index));
         b.commitAllowingStateLoss();
     }
+    /***
+     *获取当前Fragment 实例
+     *
+     * @param index 索引
+     * @return  T
+     **/
+    public <T> T getItem(int index) {
+       return (T) fragmentList.get(index);
+    }
+
 
     /***
      * 全部隐藏当前fragment

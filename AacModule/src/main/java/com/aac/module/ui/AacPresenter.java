@@ -133,9 +133,9 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
     public <ViewModelType extends ViewModel> ViewModelType getApplicationViewModel(Class<ViewModelType> modelClass) {
 
         if (view instanceof Fragment) {
-            return new ViewModelProviders.DefaultFactory(((Fragment) view).getActivity().getApplication()).create(modelClass);
+            return new ViewModelProvider.AndroidViewModelFactory(((Fragment) view).getActivity().getApplication()).create(modelClass);
         } else if (view instanceof FragmentActivity) {
-            return new ViewModelProviders.DefaultFactory(((Activity) view).getApplication()).create(modelClass);
+            return new ViewModelProvider.AndroidViewModelFactory(((Activity) view).getApplication()).create(modelClass);
         } else {
             return getInstanceViewModel(modelClass);
         }

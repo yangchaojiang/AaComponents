@@ -5,7 +5,6 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +45,7 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), setGridSpanCount()));
         }
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        //    recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         swipeRefresh.setOnRefreshListener(this);
         swipeRefresh.setRefreshing(false);
         adapter = new AacBaseQuickAdapter(this);
@@ -80,7 +79,6 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
      * **/
     public void setData(@NonNull List<M> data) {
         if (daraPage < 2) {
-            adapter.isUseEmpty(true);
             if (swipeRefresh.isRefreshing()) {
                 setRefreshing(false);
             }
@@ -102,6 +100,9 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
     @Override
     public void setError(Throwable e) {
         if (daraPage < 2) {
+            if (swipeRefresh.isRefreshing()) {
+                setRefreshing(false);
+            }
             showErrorView();
         } else {
             adapter.loadMoreFail();
@@ -135,7 +136,14 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
     public int getCurPage() {
         return daraPage;
     }
-
+    @Nullable
+    @Override
+    public M getLastItem() {
+        if (adapter.getData().isEmpty()){
+            return  null;
+        }
+        return adapter.getItem(adapter.getData().size()-1);
+    }
     /**
      * 获取RecyclerView
      **/
@@ -158,7 +166,6 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
      **/
     public void setRefreshing(boolean setRefreshing) {
         showContentView();
-        adapter.isUseEmpty(false);
         swipeRefresh.postDelayed(() -> {
             if (swipeRefresh == null) return;
             swipeRefresh.setRefreshing(setRefreshing);

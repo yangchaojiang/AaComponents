@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button2"
         android:layout_centerHorizontal="true"
-        android:text="DataBinding"
+        android:text="Coroutines"
         android:textAllCaps="false" />
 
 </LinearLayout>
