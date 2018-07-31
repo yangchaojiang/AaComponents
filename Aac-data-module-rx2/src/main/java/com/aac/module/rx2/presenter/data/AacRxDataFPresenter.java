@@ -55,7 +55,7 @@ public abstract class AacRxDataFPresenter<V extends AacDataFragment, M> extends 
     @Override
     protected void onCreate() {
         super.onCreate();
-        addDisposable(mData.subscribe(m -> postData(m),throwable -> postError(throwable)));
+        addDisposable(mData.subscribe(this::postData, this::postError));
 
     }
     /**

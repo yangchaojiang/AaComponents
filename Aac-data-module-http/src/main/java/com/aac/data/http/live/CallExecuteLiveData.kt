@@ -19,7 +19,7 @@ import io.reactivex.plugins.RxJavaPlugins
  * Deprecated:
  */
 
-class CallExecuteLiveData<T> internal constructor(private val call: Call<T>) : MutableLiveData<T>(), Callback<T> {
+class CallExecuteLiveData<T> (private val call: Call<T>) : MutableLiveData<T>(), Callback<T> {
     private var terminated = false
 
     override fun onActive() {

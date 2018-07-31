@@ -34,7 +34,8 @@ dependencies {
     //网络请求
     compile 'com.lzy.net:okgo:3.0.4'
     compile 'com.lzy.net:okrx2:2.0.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.ycjiang:Yutils:1.2.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()
@@ -46,6 +47,6 @@ publish {
     groupId = 'com.ycjiang'
     artifactId = 'AacHttpDataModule'
     publishVersion =  project.ext.publishVersion
-    desc = 'Based on google Android Architecture Components package to achieve MVP rapid development framework for data management Rx'
+    desc = 'Based on google Android Architecture Components package to achieve MVP rapid development framework for data management Rx and http'
     website = 'https://github.com/yangchaojiang/AaComponents'
 }

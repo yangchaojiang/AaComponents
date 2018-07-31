@@ -1,7 +1,6 @@
 package com.keba.utils
 
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.aac.data.http.CallExecuteLiveData
 import com.lzy.okgo.adapter.AdapterParam
