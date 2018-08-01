@@ -79,13 +79,13 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
     @Override
     public void onRefresh() {
         daraPage = 1;
-        getPresenter().setLoadListData(daraPage);
+        getPresenter().setLoadData(daraPage);
     }
 
     @Override
     public void onLoadMoreRequested() {
         daraPage += 1;
-        getPresenter().setLoadListData(daraPage);
+        getPresenter().setLoadData(daraPage);
     }
 
     /***

@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/Aac-data-module-http/Aac-data-module-http.iml" filepath="$PROJECT_DIR$/Aac-data-module-http/Aac-data-module-http.iml" />
       <module fileurl="file://$PROJECT_DIR$/Aac-data-module-rx2/Aac-data-module-rx2.iml" filepath="$PROJECT_DIR$/Aac-data-module-rx2/Aac-data-module-rx2.iml" />
       <module fileurl="file://$PROJECT_DIR$/AacModule/AacModule.iml" filepath="$PROJECT_DIR$/AacModule/AacModule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aac-data-http-rx2/aac-data-http-rx2.iml" filepath="$PROJECT_DIR$/aac-data-http-rx2/aac-data-http-rx2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -43,7 +43,7 @@ public abstract class AacDataAPresenter<V extends AacDataActivity, M> extends Aa
 
     @Override
     public void retryData() {
-        setLoadListData(1);
+        setLoadData(1);
     }
 
     /***
@@ -51,6 +51,6 @@ public abstract class AacDataAPresenter<V extends AacDataActivity, M> extends Aa
      *
      * @param pager 分页 等于1 刷新
      ***/
-    public void setLoadListData(int pager) {
+    public void setLoadData(int pager) {
     }
 }

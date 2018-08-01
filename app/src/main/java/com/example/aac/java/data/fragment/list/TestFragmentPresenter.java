@@ -1,6 +1,6 @@
 package com.example.aac.java.data.fragment.list;
 
-import com.aac.expansion.list.AacListFragmentPresenter;
+import com.aac.expansion.list.AacListFPresenter;
 import com.example.aac.java.model.TestDataViewModel;
 
 /**
@@ -9,7 +9,7 @@ import com.example.aac.java.model.TestDataViewModel;
  * Deprecated:
  */
 
-public class TestFragmentPresenter extends AacListFragmentPresenter<TestListFragment, String> {
+public class TestFragmentPresenter extends AacListFPresenter<TestListFragment, String> {
 
     private TestDataViewModel viewModel;
     @Override

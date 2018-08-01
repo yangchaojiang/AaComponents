@@ -25,7 +25,7 @@ public abstract   class AacRxDataAPresenter<V extends AacDataActivity, M> extend
     private CompositeDisposable compositeDisposable;
     //用于缓存数据的Subscriber
     private BehaviorSubject<M> mData = BehaviorSubject.create();
-    private   Subscriber subscriber = new Subscriber<M>() {
+    private   Subscriber<M> subscriber = new Subscriber<M>() {
         @Override
         public void onSubscribe(Subscription s) {
             mSubscription = s;
@@ -78,7 +78,7 @@ public abstract   class AacRxDataAPresenter<V extends AacDataActivity, M> extend
      *
      * @return Subscriber
      ***/
-    public Subscriber getDataRxSubscriber() {
+    public Subscriber<M> getDataRxSubscriber() {
         return subscriber;
     }
 

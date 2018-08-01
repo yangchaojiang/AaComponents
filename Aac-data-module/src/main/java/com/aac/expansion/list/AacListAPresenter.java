@@ -12,7 +12,7 @@ import java.util.List;
  * Deprecated:  列表数据业务
  */
 
-public abstract class AacListPresenter<V extends AacListActivity, M> extends AacDataAPresenter<V,List<M>>{
+public abstract class AacListAPresenter<V extends AacListActivity, M> extends AacDataAPresenter<V,List<M>>{
 
 
 

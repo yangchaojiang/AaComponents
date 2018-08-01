@@ -1,1 +1,1 @@
-include ':app', ':AacModule', ':Aac-data-module',':Aac-data-module-rx2', ':Aac-data-module-http', ':aac-data-http-rx2', ':Aac-data-module-coroutines'
+include ':app', ':AacModule', ':Aac-data-module',':Aac-data-module-rx2', ':Aac-data-module-http', ':Aac-data-module-coroutines'

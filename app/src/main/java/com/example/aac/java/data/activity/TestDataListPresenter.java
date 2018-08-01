@@ -16,15 +16,15 @@ public class TestDataListPresenter extends AacRxListAPresenter<TestDataListActiv
     public void onCreate() {
         super.onCreate();
         viewModel = getViewModel(TestDataViewModel.class);
-        setLoadListData(1);
+        setLoadData(1);
     }
 
     /***
      * 没有进入页面没有开启刷新需要说手动调用
      * **/
     @Override
-    public void setLoadListData(int pager) {
+    public void setLoadData(int pager) {
+        super.setLoadData(pager);
         viewModel.getListData(pager).observe(getView(), getDataSubscriber());
-      //  viewModel.getListData(getView(),"id",pager).observe(getView(),getDataSubscriber());
     }
 }
