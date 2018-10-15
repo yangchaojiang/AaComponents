@@ -14,10 +14,13 @@ import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataFPresenter;
 import com.aac.expansion.data.AacDataFragment;
 import com.aac.expansion.ener.ViewGetListener;
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,12 +30,12 @@ import java.util.List;
  * Deprecated: 列表Fragment 支持懒加载， 子类重写setOpenLazyLoad方法，开启懒加载
  */
 
-public abstract class AacListFragment<P extends AacDataFPresenter, M> extends AacDataFragment<P, List<M>>
+public abstract class AacMultiListFragment<P extends AacDataFPresenter, M extends MultiItemEntity> extends AacDataFragment<P, List<M>>
         implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
     private RecyclerView recyclerView;
     protected SwipeRefreshLayout swipeRefresh;
     private int daraPage = 1;
-    private AacBaseQuickAdapter adapter;
+    private BaseMultiItemQuickAdapter adapter;
 
     @CallSuper
     @Override
@@ -48,14 +51,14 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
         //    recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         swipeRefresh.setOnRefreshListener(this);
         swipeRefresh.setRefreshing(false);
-        adapter = new AacBaseQuickAdapter(this);
+        adapter = getMultiAdapter();
         adapter.bindToRecyclerView(recyclerView);
     }
 
     @Override
     public void initLoadHelper(@NonNull View view) {
         super.initLoadHelper(view);
-        adapter.setEmptyView(getViewLoadHelper().getEmptyLayoutId(),recyclerView);
+        adapter.setEmptyView(getViewLoadHelper().getEmptyLayoutId(), recyclerView);
     }
 
     @CallSuper
@@ -136,14 +139,16 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
     public int getCurPage() {
         return daraPage;
     }
+
     @Nullable
     @Override
     public M getLastItem() {
-        if (adapter.getData().isEmpty()){
-            return  null;
+        if (adapter.getData().isEmpty()) {
+            return null;
         }
-        return adapter.getItem(adapter.getData().size()-1);
+        return (M) adapter.getItem(adapter.getData().size() - 1);
     }
+
     /**
      * 获取RecyclerView
      **/
@@ -157,10 +162,13 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
      **/
     @Override
     public BaseQuickAdapter<M, BaseViewHolder> getAdapter() {
-        return adapter;
+        return null;
     }
 
-
+    @Override
+    public int getItemLayout() {
+        return 0;
+    }
     /***
      * @param setRefreshing 是否刷新 true   false 则停止
      **/
@@ -185,32 +193,9 @@ public abstract class AacListFragment<P extends AacDataFPresenter, M> extends Aa
             adapter.setOnLoadMoreListener(this, recyclerView);
         }
     }
-    /****
-     * BaseViewHolder 实现item 布局内容
-     *
-     * @param helper BaseViewHolder
-     * @param item   数据
-     **/
-    protected abstract   void convertViewHolder(BaseViewHolder helper, M item);
-    /***
-     * 数据式适配器
-     ****/
-    private class AacBaseQuickAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-        private WeakReference<AacListFragment> weakReference;
 
-        private AacBaseQuickAdapter(AacListFragment aacListFragment) {
-            super(getItemLayout());
-            weakReference = new WeakReference<>(aacListFragment);
-
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, M item) {
-            if (weakReference.get() == null) return;
-            convertViewHolder(helper, item);
-        }
-    }
-
+    @NonNull
+    public  abstract  BaseMultiItemQuickAdapter getMultiAdapter();
 
 }
 

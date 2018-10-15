@@ -15,10 +15,8 @@ import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
 import com.aac.expansion.data.AacDataActivity;
 import com.aac.expansion.ener.ViewGetListener;
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -27,11 +25,11 @@ import java.util.List;
  * Deprecated: 数据父类
  */
 
-public abstract class AacListActivity<P extends AacDataAPresenter, M> extends AacDataActivity<P, List<M>>
+public abstract class AacMultiListActivity<P extends AacDataAPresenter, M> extends AacDataActivity<P, List<M>>
         implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
     protected RecyclerView recyclerView;
     protected SwipeRefreshLayout swipeRefresh;
-    private AacBaseQuickAdapter adapter;
+    private BaseMultiItemQuickAdapter adapter;
     private int daraPage = 1;
 
     @CallSuper
@@ -47,7 +45,7 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
         }
       //  recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         swipeRefresh.setOnRefreshListener(this);
-        adapter = new AacBaseQuickAdapter(this);
+        adapter =getMultiAdapter();
         adapter.bindToRecyclerView(recyclerView);
         //检查是否满一屏，如果不满足关闭loadMore
         initLoadHelper(swipeRefresh);
@@ -110,7 +108,6 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
             adapter.addData(data);
         }
 
-
     }
 
     /***
@@ -143,29 +140,12 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
         return daraPage;
     }
 
-    @Nullable
-    @Override
-    public M getLastItem() {
-        if (adapter.getData().isEmpty()){
-            return  null;
-        }
-        return adapter.getItem(adapter.getData().size()-1);
-    }
-
     /**
      * 获取RecyclerView
      **/
     @Override
     public RecyclerView getRecyclerView() {
         return recyclerView;
-    }
-
-    /**
-     * 获取数据适配器实例
-     **/
-    @Override
-    public BaseQuickAdapter<M, BaseViewHolder> getAdapter() {
-        return adapter;
     }
 
 
@@ -205,29 +185,6 @@ public abstract class AacListActivity<P extends AacDataAPresenter, M> extends Aa
             adapter.setOnLoadMoreListener(this, recyclerView);
         }
     }
-    /****
-     * BaseViewHolder 实现item 布局内容
-     *
-     * @param helper BaseViewHolder
-     * @param item   数据
-     **/
-    protected abstract   void convertViewHolder(BaseViewHolder helper, M item);
-    /***
-     * 数据式适配器
-     ****/
-    private class AacBaseQuickAdapter extends BaseQuickAdapter<M, BaseViewHolder> {
-        private WeakReference<AacListActivity> weakReference;
-
-        private AacBaseQuickAdapter(AacListActivity aacListFragment) {
-            super(getItemLayout());
-            weakReference = new WeakReference<>(aacListFragment);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, M item) {
-            if (weakReference.get() == null) return;
-            convertViewHolder(helper, item);
-        }
-    }
-
+    @NonNull
+    public  abstract  BaseMultiItemQuickAdapter getMultiAdapter();
 }

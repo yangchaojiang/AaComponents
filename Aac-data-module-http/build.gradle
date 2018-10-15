@@ -47,6 +47,6 @@ publish {
     groupId = 'com.ycjiang'
     artifactId = 'AacHttpDataModule'
     publishVersion =  project.ext.publishVersion
-    desc = 'Based on google Android Architecture Components package to achieve MVP rapid development framework for data management Rx and http'
+    desc = 'rapid development framework for data management Rx and http'
     website = 'https://github.com/yangchaojiang/AaComponents'
 }

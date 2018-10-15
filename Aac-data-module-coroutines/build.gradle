@@ -30,6 +30,6 @@ dependencies {
     //网络请求
     compile 'com.lzy.net:okgo:3.0.4'
     compile 'com.lzy.net:okrx2:2.0.2'
-    compile "org.jetbrains.anko:anko-coroutines:$anko_version"
+    implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

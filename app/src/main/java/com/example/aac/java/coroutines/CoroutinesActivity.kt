@@ -56,7 +56,7 @@ class CoroutinesActivity : AppCompatActivity() {
                 BeanConverter<DataBen>("-1", DataBen::class.java))
     }
 
-    fun DataBean(context: Context, string: String): Flowable<DataBen> {
+    fun DataBean(string: String): Flowable<DataBen> {
         val params = HttpParams()
         params.put("string", string)
         return httpRxPost<DataBen>("sss"

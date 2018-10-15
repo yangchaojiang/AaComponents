@@ -50,14 +50,6 @@ public interface ViewGetListener<M> extends ViewGetDataListener{
     @LayoutRes
     int getItemLayout();
 
-    /****
-     * BaseViewHolder 实现item 布局内容
-     *
-     * @param helper BaseViewHolder
-     * @param item   数据
-     **/
-    void convertViewHolder(BaseViewHolder helper, M item);
-
 
 
 }
