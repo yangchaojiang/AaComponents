@@ -9,18 +9,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataFPresenter;
 import com.aac.expansion.data.AacDataFragment;
-import com.aac.expansion.ener.ViewGetListener;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +25,7 @@ import java.util.List;
  */
 
 public abstract class AacMultiListFragment<P extends AacDataFPresenter, M extends MultiItemEntity> extends AacDataFragment<P, List<M>>
-        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
+        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener{
     private RecyclerView recyclerView;
     protected SwipeRefreshLayout swipeRefresh;
     private int daraPage = 1;
@@ -115,60 +109,6 @@ public abstract class AacMultiListFragment<P extends AacDataFPresenter, M extend
     public void setDaraPage(int daraPage) {
         this.daraPage = daraPage;
     }
-
-    @Override
-    public int getContentLayoutId() {
-        return R.layout.aac_include_recycle_view;
-    }
-
-
-    @Override
-    public void onRefresh() {
-        daraPage = 1;
-        getPresenter().setLoadData(daraPage);
-    }
-
-    @Override
-    public void onLoadMoreRequested() {
-        daraPage += 1;
-        getPresenter().setLoadData(daraPage);
-    }
-
-
-    @Override
-    public int getCurPage() {
-        return daraPage;
-    }
-
-    @Nullable
-    @Override
-    public M getLastItem() {
-        if (adapter.getData().isEmpty()) {
-            return null;
-        }
-        return (M) adapter.getItem(adapter.getData().size() - 1);
-    }
-
-    /**
-     * 获取RecyclerView
-     **/
-    @Override
-    public RecyclerView getRecyclerView() {
-        return recyclerView;
-    }
-
-    /**
-     * 获取数据适配器实例
-     **/
-    @Override
-    public BaseQuickAdapter<M, BaseViewHolder> getAdapter() {
-        return null;
-    }
-
-    @Override
-    public int getItemLayout() {
-        return 0;
-    }
     /***
      * @param setRefreshing 是否刷新 true   false 则停止
      **/
@@ -192,6 +132,48 @@ public abstract class AacMultiListFragment<P extends AacDataFPresenter, M extend
         if (enable) {
             adapter.setOnLoadMoreListener(this, recyclerView);
         }
+    }
+    @Override
+    public int getContentLayoutId() {
+        return R.layout.aac_include_recycle_view;
+    }
+
+
+    @Override
+    public void onRefresh() {
+        daraPage = 1;
+        getPresenter().setLoadData(daraPage);
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        daraPage += 1;
+        getPresenter().setLoadData(daraPage);
+    }
+
+    public int getCurPage() {
+        return daraPage;
+    }
+
+    @Nullable
+    public M getLastItem() {
+        if (adapter.getData().isEmpty()) {
+            return null;
+        }
+        return (M) adapter.getItem(adapter.getData().size() - 1);
+    }
+    /**
+     * 获取RecyclerView
+     **/
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+    /***
+     * 设置网格中的列数
+     * 子类重写该方法 大于1 使用网格布局 否则L是list
+     */
+    public int setGridSpanCount() {
+        return 1;
     }
 
     @NonNull

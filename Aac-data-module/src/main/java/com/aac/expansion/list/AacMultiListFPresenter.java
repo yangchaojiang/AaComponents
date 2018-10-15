@@ -10,7 +10,7 @@ import java.util.List;
  * Deprecated: Fragment 列表数据理处理
  */
 
-public abstract class AacMultiListFPresenter<V extends AacListFragment, M> extends AacDataFPresenter<V,List<M>> {
+public abstract class AacMultiListFPresenter<V extends AacMultiListFragment, M> extends AacDataFPresenter<V,List<M>> {
 
 
 

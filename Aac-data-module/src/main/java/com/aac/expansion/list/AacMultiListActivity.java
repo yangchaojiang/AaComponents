@@ -10,11 +10,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import com.aac.expansion.R;
 import com.aac.expansion.data.AacDataAPresenter;
 import com.aac.expansion.data.AacDataActivity;
-import com.aac.expansion.ener.ViewGetListener;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import java.util.List;
@@ -26,7 +24,7 @@ import java.util.List;
  */
 
 public abstract class AacMultiListActivity<P extends AacDataAPresenter, M> extends AacDataActivity<P, List<M>>
-        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, ViewGetListener<M> {
+        implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     protected RecyclerView recyclerView;
     protected SwipeRefreshLayout swipeRefresh;
     private BaseMultiItemQuickAdapter adapter;
@@ -135,7 +133,6 @@ public abstract class AacMultiListActivity<P extends AacDataAPresenter, M> exten
         this.daraPage = daraPage;
     }
 
-    @Override
     public int getCurPage() {
         return daraPage;
     }
@@ -143,11 +140,9 @@ public abstract class AacMultiListActivity<P extends AacDataAPresenter, M> exten
     /**
      * 获取RecyclerView
      **/
-    @Override
     public RecyclerView getRecyclerView() {
         return recyclerView;
     }
-
 
     /***
      * 进入页面开启是否下拉刷新
@@ -165,12 +160,10 @@ public abstract class AacMultiListActivity<P extends AacDataAPresenter, M> exten
         }, 200);
 
     }
-
     /***
      * 设置网格中的列数
      * 子类重写该方法 大于1 使用网格布局 否则L是list
      */
-    @Override
     public int setGridSpanCount() {
         return 1;
     }
@@ -187,4 +180,5 @@ public abstract class AacMultiListActivity<P extends AacDataAPresenter, M> exten
     }
     @NonNull
     public  abstract  BaseMultiItemQuickAdapter getMultiAdapter();
+
 }

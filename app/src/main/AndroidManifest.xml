@@ -23,6 +23,23 @@
         <activity android:name=".java.data.fragment.list.TestDataFragmentActivity" />
         <activity android:name=".java.data.fragment.data.Test2FragmentActivity" />
         <activity android:name=".java.data.fragment.TestFragmentActivity" />
+        <activity
+            android:name=".java.data.multi.ui.MultiActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+
+        <activity
+            android:name=".java.data.test23.ui.Test23Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".java.data.test77.ui.Test77Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>
 
 </manifest>

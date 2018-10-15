@@ -37,7 +37,7 @@ allprojects {
         versionCode = 1
         versionName = "1.0"
         libSversion="26.1.0"
-        publishVersion="2.5.0"
+        publishVersion="2.5.2"
     }
 
     //加上这些
