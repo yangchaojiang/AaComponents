@@ -1,4 +1,7 @@
 # AaComponents
+
+[ ![Download](https://api.bintray.com/packages/ycjiang/ycjiang/AacHttpDataModule/images/download.svg) ](https://bintray.com/ycjiang/ycjiang/AacHttpDataModule/_latestVersion)
+
 基于google Android Architecture Components 封装实现MVP快速开发框架
 
 AaComponents 是一套基于MVP模式的快速开发框架。定义了一套开发规范。
@@ -6,10 +9,10 @@ AaComponents 是一套基于MVP模式的快速开发框架。定义了一套开�
 完成APP开发过程中大量繁琐工作。
 
 ##依赖
-  * 1 compile 'com.ycjiang:AacDataModule:2.5.0'
-  * 2 compile 'com.ycjiang:AacModule:2.5.0'
-  * 3 compile 'com.ycjiang:AacRxDataModule:2.5.0'
-  * 4 compile 'com.ycjiang:AacHttpDataModule:2.5.0'
+  * 1 compile 'com.ycjiang:AacDataModule:2.5.2'
+  * 2 compile 'com.ycjiang:AacModule:2.5.2'
+  * 3 compile 'com.ycjiang:AacRxDataModule:2.5.2'
+  * 4 compile 'com.ycjiang:AacHttpDataModule:2.5.2'
     >>     注意 引用 AaDataModule 默认引用 AacModule 包， 不需要在引用在AaDataModule
 
 ```
