@@ -11,7 +11,7 @@ import com.lzy.okgo.adapter.CallAdapter
  * Deprecated:
  */
 
-class CoroutinesDataAdapter<T> : CallAdapter<T, CoroutinesExecute<T>> {
+class ColourisesDataAdapter<T> : CallAdapter<T, CoroutinesExecute<T>> {
     override fun adapt(call: Call<T>, param: AdapterParam?): CoroutinesExecute<T>?{
         return CoroutinesExecute(call)
     }

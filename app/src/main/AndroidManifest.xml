@@ -1,45 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aac">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.aac">
 
-    <application
-        android:name=".App"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".java.MainActivity"
-            android:theme="@style/MainTheme">
+    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:name=".App" android:supportsRtl="true" android:theme="@style/AppTheme">
+        <activity android:name=".java.MainActivity" android:theme="@style/MainTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".java.data.activity.TestDataActivity" />
-        <activity android:name=".java.data.activity.TestDataListActivity" />
-        <activity android:name=".java.data.fragment.list.TestDataFragmentActivity" />
-        <activity android:name=".java.data.fragment.data.Test2FragmentActivity" />
-        <activity android:name=".java.data.fragment.TestFragmentActivity" />
-        <activity
-            android:name=".java.data.multi.ui.MultiActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".java.data.activity.TestDataActivity"/>
+        <activity android:name=".java.data.activity.TestDataListActivity"/>
+        <activity android:name=".java.data.fragment.list.TestDataFragmentActivity"/>
+        <activity android:name=".java.data.fragment.data.Test2FragmentActivity"/>
+        <activity android:name=".java.data.fragment.TestFragmentActivity"/>
+        <activity android:launchMode="singleTop" android:name=".java.data.multi.ui.MultiActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
 
-        <activity
-            android:name=".java.data.test23.ui.Test23Activity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name=".java.data.test77.ui.Test77Activity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-    </application>
+        <activity android:launchMode="singleTop" android:name=".java.coroutines.CoroutinesActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+
+        <activity android:launchMode="singleTop" android:name=".java.data.test.ui.TestActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+    <activity android:launchMode="singleTop" android:name=".utils.rwar.ui.RwarActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+</application>
 
 </manifest>

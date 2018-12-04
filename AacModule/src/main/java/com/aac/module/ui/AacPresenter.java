@@ -138,9 +138,9 @@ public abstract class AacPresenter<ActivityType> implements LifecycleObserver {
             return new ViewModelProvider.AndroidViewModelFactory(((Activity) view).getApplication()).create(modelClass);
         } else {
             return getInstanceViewModel(modelClass);
+
         }
     }
-
     /**
      * 返回是否当前生命中周期状态
      *

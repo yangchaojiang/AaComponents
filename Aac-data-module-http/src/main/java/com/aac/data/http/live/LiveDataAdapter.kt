@@ -28,7 +28,7 @@ it.onError(e)
 
    class LiveDataAdapter<T> : CallAdapter<T, MutableLiveData<T>> {
     override fun adapt(call: Call<T>, param: AdapterParam?): MutableLiveData<T>? {
-        return CallExecuteLiveData<T>(call)
+        return CallExecuteLiveData(call)
     }
 
 }
